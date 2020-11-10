@@ -1,0 +1,66 @@
+{{ image }}:
+ type: image
+ url: {{ image_url }}
+
+{% if virtual_bootstrap %}
+{{ cluster }}-bootstrap:
+ pool: {{ pool }} 
+ numcpus: {{ virtual_bootstrap_numcpus }}
+ cloudinit: false
+ start: false
+ iso: {{ cluster }}-bootstrap.iso
+ memory: {{ virtual_bootstrap_memory }}
+ nets:
+  - name: {{ provisioning_net }}
+{%- if virtual_bootstrap_mac != None %}
+    mac: {{ virtual_bootstrap_mac }}
+{%- endif %}
+ disks:
+{%- for size in [disk_size] + extra_disks %}
+  - size: {{ size }}
+    interface: scsi
+{%- endfor %}
+{%- endif %}
+
+{{ cluster }}-installer: 
+ image: {{ image }} 
+ pool: {{ pool }} 
+ numcpus: {{ numcpus }}
+ keys: {{ keys }}
+{%- if 'rhel' in image %}
+ rhnregister: {{ rhnregister }}
+ networkwait: {{ rhnwait }}
+{%- endif %}
+ memory: {{ memory }}
+ notify: {{ notify }}
+ notifyscript: {{ notifyscript }}
+ nets:                                                                                                                                         
+ - name: {{ baremetal_net }}
+ - name: {{ provisioning_net }}
+   noconf: yes
+ disks:
+ - {{ disk_size }}
+ files:
+ - 01_patch_installconfig.sh
+ - 02_packages.sh
+ - 03_network.sh
+ - 04_get_clients.sh
+ - 05_disconnected.sh
+ - 06_nbde.sh
+ - 07_ntp.sh
+ - 08_deploy_openshift.sh
+ - 09_create_isos.sh
+ - install-config.yaml                                                                                                                           
+ - .bashrc
+ - iso.sh
+ - iso.ign.template
+ - create_iso_ignition.py
+ - origin: {{ pullsecret }}
+   path: /root/openshift_pull.json                                                                                                                    
+ - path: /root/manifests
+   origin: manifests
+ - 99-openshift-tang-encryption-clevis.sample.yaml
+ - 99-openshift-tang-encryption-ka.sample.yaml
+ - 99-openshift-chrony.sample.yaml
+ scripts:
+ - deploy.sh

@@ -1,0 +1,20 @@
+apiVersion: v1
+baseDomain: {{ domain }}
+networking:
+  networkType: OVNKubernetes
+  machineCIDR: {{ machine_cidr }}
+  clusterNetworks:
+  - cidr: fd01::/48
+    hostPrefix: 64
+  serviceNetwork:
+  - fd02::/112
+metadata:
+  name: {{ cluster }}
+compute:
+- name: worker
+  replicas: {{ workers }}
+controlPlane:
+  name: master
+  replicas: {{ masters }}
+platform:
+  none: {}

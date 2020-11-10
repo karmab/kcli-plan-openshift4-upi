@@ -1,0 +1,42 @@
+info: |
+    This deploys a vm to be used for upi
+image: centos8
+installer_mac:
+openshift_image: registry.svc.ci.openshift.org/ocp/release:4.6
+cluster: upi
+domain: karmalabs.com
+masters: 3
+workers: 0
+keys: []
+api_ip:
+ingress_ip:
+image_url:
+network: default
+pool: default                                                                                                                                 
+numcpus: 16   
+memory: 32768
+disk_size: 30
+extra_disks: []
+rhnregister: true
+rhnwait: 30
+ipmi_user: root
+ipmi_password: calvin
+baremetal_net: default
+provisioning_net: fakeipv6
+pullsecret: openshift_pull.json
+notifyscript: notify.sh
+virtual_bootstrap: true
+virtual_bootstrap_numcpus: 8
+virtual_bootstrap_memory: 16384
+virtual_bootstrap_mac: aa:aa:aa:bb:bb:cc
+notify: true
+deploy: true
+disconnected_user: dummy
+disconnected_password: dummy
+disconnected_origin: quay.io
+disconnected_prefix: ocp4
+nbde: false
+ntp: false
+ntp_server: 0.rhel.pool.ntp.org
+tag: "4.6.1"
+machine_cidr: 2001:db8:dead:beef:fe::/96
