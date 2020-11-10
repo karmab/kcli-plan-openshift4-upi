@@ -1,13 +1,15 @@
 ## Purpose
 
 This repository provides a plan which deploys a vm where:
-- openshift-baremetal-install is downloaded or compiled from source (with an additional list of PR numbers to apply)
-- stop the nodes to deploy through ipmi
-- launch the install against a set of baremetal nodes. Virtual masters can also be deployed.
+- openshift-install and oc are downloaded
+- dnsmasq and radvd are set to provide ipv6 services in a dedicated network.
+- openshift-install is leveraged to generate ignition file for all the nodes.
+- rhcos live iso is used along with coreos-installer to generate an auto installer for each node
+- an optional bootstrap vm is precreated to be used along with the live iso
 
 ## Why
 
-To deploy baremetal using `bare minimum` on the provisioning node
+Because it was time to do some upi messing around
 
 ## Requirements
 
@@ -18,10 +20,10 @@ To deploy baremetal using `bare minimum` on the provisioning node
 
 ### on the provisioning node
 
-- libvirt daemon (with fw_cfg support)
+- libvirt daemon
 - two physical bridges:
     - baremetal with a nic from the external network
-    - provisioning with a nic from the provisioning network. Ideally assign it an ip of 172.22.0.1/24
+    - provisioning with a nic from the provisioning network
 
 Here's a script you can run on the provisioning node for that (adjust the nics variable as per your environment)
 
@@ -57,27 +59,10 @@ Prepare a valid parameter file with the information needed. At least, you need t
 
 - api_ip
 - ingress_ip
-- dns_ip (optional)
-- ipmi_user
-- ipmi_password
-- an array of your masters (if thet are not virtual). Each entry in this array needs at least the provisioning_mac and ipmi_address. Optionally you can indicate for each entry a specific ipmi_user, ipmi_password and disk (to be used as rootdevice hint) either as /dev/XXX or simply XXX
-- an array of your workers (can be left empty if you only want to deploy masters). The format of those entries follow the one indicated for masters.
-
-Here's a snippet what the workers variable might look like:
-
-```
-workers:
-- ipmi_address: 192.168.1.5
-  provisioning_mac: 98:03:9b:62:ab:19
-- ipmi_address: 192.168.1.6
-  provisioning_mac: 98:03:9b:62:ab:17
-  disk: /dev/sde
-```
 
 You can have a look at:
 
 - [parameters.yml.sample](parameters.yml.sample) for a parameter file targetting baremetal nodes only
-- [parameters_virtual.yml.sample](parameters_virtual.yml.sample) for one combining virtual masters and physical workers.
 
 Call the resulting file `kcli_parameters.yml` to avoid having to specify it in the creation command.
 
@@ -87,75 +72,47 @@ Then you can launch deployment with:
 kcli create plan
 ```
 
-## Interacting in the vm
-
-The deployed vm comes with a set of helpers for you:
-- scripts deploy.sh and clean.sh allow you to manually launch an install or clean a failed one
-- you can run *baremetal node list* during deployment to check the status of the provisioning of the nodes (Give some time after launching an install before ironic is accessible).
-- script *ipmi.py* can be used to check the power status of the baremetal node or to stop them (using `ipmi.py off`)
-
 ## Parameters
 
-|Parameter                 |Default Value                                |
-|--------------------------|---------------------------------------------|
-|image                     |centos8                                      |
-|openshift_image           |registry.svc.ci.openshift.org/ocp/release:4.5|
-|cluster                   |openshift                                    |
-|domain                    |karmalabs.com                                |
-|network_type              |OVNKubernetes                                |
-|keys                      |[]                                           |
-|api_ip                    |None                                         |
-|dns_ip                    |None                                         |
-|ingress_ip                |None                                         |
-|image_url                 |None                                         |
-|network                   |default                                      |
-|pool                      |default                                      |
-|numcpus                   |16                                           |
-|masters                   |[]                                           |
-|workers                   |[]                                           |
-|memory                    |32768                                        |
-|disk_size                 |30                                           |
-|extra_disks               |[]                                           |
-|rhnregister               |True                                         |
-|rhnwait                   |30                                           |
-|provisioning_interface    |eno1                                         |
-|provisioning_net          |provisioning                                 |
-|provisioning_ip           |172.22.0.3                                   |
-|provisioning_cidr         |172.22.0.0/24                                |
-|provisioning_range        |172.22.0.10,172.22.0.100                     |
-|provisioning_installer_ip |172.22.0.253                                 |
-|provisioning_macs         |[]                                           |
-|ipmi_user                 |root                                         |
-|ipmi_password             |calvin                                       |
-|baremetal_net             |baremetal                                    |
-|baremetal_cidr            |None                                         |
-|baremetal_macs            |[]                                           |
-|baremetal_ips             |[]                                           |
-|pullsecret                |openshift_pull.json                          |
-|notifyscript              |notify.sh                                    |
-|virtual_masters           |False                                        |
-|virtual_masters_number    |3                                            |
-|virtual_masters_numcpus   |8                                            |
-|virtual_masters_memory    |32768                                        |
-|virtual_masters_mac_prefix|aa:aa:aa:aa:aa                               |
-|virtual_workers           |False                                        |
-|virtual_workers_number    |1                                            |
-|virtual_workers_numcpus   |8                                            |
-|virtual_workers_memory    |16384                                        |
-|virtual_workers_mac_prefix|aa:aa:aa:bb:bb                               |
-|virtual_workers_deploy    |False                                        |
-|cache                     |True                                         |
-|notify                    |True                                         |
-|deploy                    |True                                         |
-|lab                       |False                                        |
-|disconnected              |False                                        |
-|registry_user             |dummy                                        |
-|registry_password         |dummy                                        |
-|nfs                       |True                                         |
-|imageregistry             |False                                        |
-|build                     |False                                        |
-|go_version                |1.13.8                                       |
-|prs                       |[]                                           |
-|imagecontentsources       |[]                                           |
-|fips                      |False                                        |
-|cas                       |[]                                           |
+|Parameter                |Default Value                                |
+|-------------------------|---------------------------------------------|
+|image                    |centos8                                      |
+|installer_mac            |None                                         |
+|openshift_image          |registry.svc.ci.openshift.org/ocp/release:4.6|
+|cluster                  |upi                                          |
+|domain                   |karmalabs.com                                |
+|masters                  |3                                            |
+|workers                  |0                                            |
+|keys                     |[]                                           |
+|api_ip                   |None                                         |
+|ingress_ip               |None                                         |
+|image_url                |None                                         |
+|network                  |default                                      |
+|pool                     |default                                      |
+|numcpus                  |16                                           |
+|memory                   |32768                                        |
+|disk_size                |30                                           |
+|extra_disks              |[]                                           |
+|rhnregister              |True                                         |
+|rhnwait                  |30                                           |
+|ipmi_user                |root                                         |
+|ipmi_password            |calvin                                       |
+|baremetal_net            |default                                      |
+|provisioning_net         |fakeipv6                                     |
+|pullsecret               |openshift_pull.json                          |
+|notifyscript             |notify.sh                                    |
+|virtual_bootstrap        |True                                         |
+|virtual_bootstrap_numcpus|8                                            |
+|virtual_bootstrap_memory |16384                                        |
+|virtual_bootstrap_mac    |aa:aa:aa:bb:bb:cc                            |
+|notify                   |True                                         |
+|deploy                   |True                                         |
+|disconnected_user        |dummy                                        |
+|disconnected_password    |dummy                                        |
+|disconnected_origin      |quay.io                                      |
+|disconnected_prefix      |ocp4                                         |
+|nbde                     |False                                        |
+|ntp                      |False                                        |
+|ntp_server               |0.rhel.pool.ntp.org                          |
+|tag                      |4.6.1                                        |
+|machine_cidr             |2001:db8:dead:beef:fe::/96                   |
