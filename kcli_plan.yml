@@ -12,13 +12,51 @@
  memory: {{ virtual_bootstrap_memory }}
  nets:
   - name: {{ provisioning_net }}
-{%- if virtual_bootstrap_mac != None %}
     mac: {{ virtual_bootstrap_mac }}
-{%- endif %}
  disks:
 {%- for size in [disk_size] + extra_disks %}
   - size: {{ size }}
     interface: scsi
+{%- endfor %}
+{%- endif %}
+
+{% if virtual_masters %}
+{%- for num in range(0, virtual_masters_number) %}
+{{ cluster }}-master-{{ num }}:
+ pool: {{ pool }}
+ numcpus: {{ virtual_masters_numcpus }}
+ cloudinit: false
+ start: false
+ iso: {{ cluster }}-master.iso
+ memory: {{ virtual_masters_memory }}
+ nets:
+  - name: {{ provisioning_net }}
+    mac: {{ virtual_masters_mac_prefix + ":" + "%02.d" | format(num + 1)| string }}
+ disks:
+{%- for size in [disk_size] + extra_disks %}
+  - size: {{ size }}
+    interface: scsi
+{%- endfor %}
+{%- endfor %}
+{%- endif %}
+
+{% if virtual_workers %}
+{%- for num in range(0, virtual_workers_number) %}
+{{ cluster }}-worker-{{ num }}:
+ pool: {{ pool }}
+ numcpus: {{ virtual_workers_numcpus }}
+ cloudinit: false
+ start: false
+ iso: {{ cluster }}-worker.iso
+ memory: {{ virtual_workers_memory }}
+ nets:
+  - name: {{ provisioning_net }}
+    mac: {{ virtual_workers_mac_prefix + ":" + "%02.d" | format(num + 1)| string }}
+ disks:
+{%- for size in [disk_size] + extra_disks %}
+  - size: {{ size }}
+    interface: scsi
+{%- endfor %}
 {%- endfor %}
 {%- endif %}
 

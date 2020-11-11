@@ -1,3 +1,6 @@
+
+# nmcli con mod baremetal.153 +ipv6.addresses 2620:52:0:1303::3/64
+# nmcli con mod baremetal.153 +ipv6.addresses 2620:52:0:1303::3/64
 yum -y install dnsmasq radvd haproxy
 cp /root/dnsmasq.conf /etc
 # touch /opt/leases
