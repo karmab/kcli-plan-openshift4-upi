@@ -52,4 +52,4 @@ disconnected_prefix: ocp4
 nbde: false
 ntp: false
 ntp_server: 0.rhel.pool.ntp.org
-tag: 4.6.3
+tag: 4.6.1

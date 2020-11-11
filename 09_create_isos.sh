@@ -13,5 +13,5 @@ for role in bootstrap master worker; do
  cp /root/ocp/$role.ign config.ign
  python3 create_iso_ignition.py 
  $COREOSINSTALLER iso ignition embed -fi iso.ign rhcos-live.x86_64.iso
- cp rhcos-live.x86_64.iso  /var/www/html/$cluster-$role.iso
+ cp rhcos-live.x86_64.iso /var/www/html/$cluster-$role.iso
 done

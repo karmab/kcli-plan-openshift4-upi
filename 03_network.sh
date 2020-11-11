@@ -15,4 +15,5 @@ cp /root/radvd.conf /etc
 cp /root/haproxy.cfg /etc/haproxy
 systemctl enable --now dnsmasq
 systemctl enable --now radvd
+sleep 20
 systemctl enable --now haproxy
