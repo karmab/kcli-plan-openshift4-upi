@@ -1,6 +1,6 @@
 echo creating isos for you
 cluster={{ cluster }}
-yum -y install httpd python3
+dnf -y install httpd python3
 sed -i "s/Listen 80/Listen 8080/" /etc/httpd/conf/httpd.conf
 systemctl enable --now httpd
 cd /root/

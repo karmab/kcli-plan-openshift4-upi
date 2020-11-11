@@ -1,4 +1,4 @@
-yum -y install clevis tang
+dnf -y install clevis tang
 semanage port -a -t tangd_port_t -p tcp 7500
 # firewall-cmd --add-port=7500/tcp
 systemctl enable tangd.socket

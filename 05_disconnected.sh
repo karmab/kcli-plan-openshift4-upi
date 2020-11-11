@@ -1,5 +1,10 @@
 export PATH=/root/bin:$PATH
-yum -y install podman httpd httpd-tools jq bind-utils
+dnf -y install httpd httpd-tools jq bind-utils
+dnf -y module disable container-tools
+dnf -y install 'dnf-command(copr)'
+dnf -y copr enable rhcontainerbot/container-selinux
+curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable.repo https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/CentOS_8/devel:kubic:libcontainers:stable.repo
+dnf -y install podman
 IP=$(hostname -I | cut -d' ' -f1)
 REVERSE_NAME=$(dig -x $IP +short | sed 's/\.[^\.]*$//')
 REGISTRY_NAME=${REVERSE_NAME:-$(hostname -f)}
