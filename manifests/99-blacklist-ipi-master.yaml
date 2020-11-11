@@ -1,6 +1,8 @@
 kind: MachineConfig
 metadata:
-  name: blacklist-ipi
+  name: blacklist-ipi-master
+  labels:
+    machineconfiguration.openshift.io/role: master
 spec:
   config:
     ignition:
