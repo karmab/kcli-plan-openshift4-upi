@@ -8,6 +8,10 @@ domain: karmalabs.com
 masters: 3
 workers: 1
 keys: []
+machine_cidr: 2620:52:0:1302::/64
+installer_ip: 2620:52:0:1302::1
+installer_mask: 64
+installer_gateway: 2620:52:0:1302::1
 api_ip: 2620:52:0:1302::2
 ingress_ip: 2620:52:0:1302::3
 image_url:
@@ -38,5 +42,4 @@ disconnected_prefix: ocp4
 nbde: false
 ntp: false
 ntp_server: 0.rhel.pool.ntp.org
-tag: "4.6.1"
-machine_cidr: 2620:52:0:1302::/64
+tag: 4.6.3

@@ -37,7 +37,12 @@
  nets:                                                                                                                                         
  - name: {{ baremetal_net }}
  - name: {{ provisioning_net }}
-   noconf: yes
+   ip: {{ installer_ip }}
+   mask: {{ installer_mask }}
+   gateway: {{ installer_gateway }}
+   vips:
+   - {{ api_ip }}
+   - {{ ingress_ip }}
  disks:
  - {{ disk_size }}
  files:
@@ -65,6 +70,7 @@
  - dnsmasq.conf
  - path: /opt/hosts
    origin: hosts
+   mode: 755
  - haproxy.cfg
  - radvd.conf
  scripts:
