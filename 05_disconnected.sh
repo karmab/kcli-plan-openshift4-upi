@@ -56,7 +56,7 @@ imageContentSources:
   source: quay.io/openshift-release-dev/ocp-v4.0-art-dev
 - mirrors:
   - $LOCAL_REGISTRY/{{ disconnected_prefix }}
-  source: {{ disconnected_origin }}/ocp/release
+  source: {{ disconnected_origin }}/ocp-release
 EOF
 
 echo "additionalTrustBundle: |" >> /root/install-config.yaml

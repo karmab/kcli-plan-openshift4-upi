@@ -8,6 +8,7 @@ cp /root/dnsmasq.conf /etc
 cp /etc/resolv.conf /opt
 chmod 755 /opt/resolv.conf
 echo nameserver $(hostname -I | cut -d' ' -f1) > /etc/resolv.conf
+echo search {{ cluster }}.{{ domain }} >> /etc/resolv.conf
 chattr +i /etc/resolv.conf
 cp /root/radvd.conf /etc
 cp /root/haproxy.cfg /etc/haproxy
