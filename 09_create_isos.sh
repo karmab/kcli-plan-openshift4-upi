@@ -14,5 +14,6 @@ COREOSINSTALLER="podman run --privileged --rm -v /dev:/dev -v /run/udev:/run/ude
 for role in bootstrap master worker; do
  cp /root/ocp/$role.ign config.ign
  python3 create_iso_ignition.py 
- $COREOSINSTALLER iso ignition embed -fi iso.ign -o /var/www/html/$cluster-$role.iso rhcos-live.x86_64.iso
+ $COREOSINSTALLER iso ignition embed -fi iso.ign rhcos-live.x86_64.iso
+ cp rhcos-live.x86_64.iso  /var/www/html/$cluster-$role.iso
 done

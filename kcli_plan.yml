@@ -15,8 +15,7 @@
     mac: {{ virtual_bootstrap_mac }}
  disks:
 {%- for size in [disk_size] + extra_disks %}
-  - size: {{ size }}
-    interface: scsi
+  - {{ size }}
 {%- endfor %}
 {%- endif %}
 
@@ -34,8 +33,7 @@
     mac: {{ virtual_masters_mac_prefix + ":" + "%02.d" | format(num + 1)| string }}
  disks:
 {%- for size in [disk_size] + extra_disks %}
-  - size: {{ size }}
-    interface: scsi
+  - {{ size }}
 {%- endfor %}
 {%- endfor %}
 {%- endif %}
@@ -54,8 +52,7 @@
     mac: {{ virtual_workers_mac_prefix + ":" + "%02.d" | format(num + 1)| string }}
  disks:
 {%- for size in [disk_size] + extra_disks %}
-  - size: {{ size }}
-    interface: scsi
+  - {{ size }}
 {%- endfor %}
 {%- endfor %}
 {%- endif %}

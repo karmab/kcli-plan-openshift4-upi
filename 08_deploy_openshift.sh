@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 #set -euo pipefail
-
 cd /root
 export PATH=/root/bin:$PATH
 export HOME=/root
