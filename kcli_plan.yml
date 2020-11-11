@@ -62,5 +62,10 @@
  - 99-openshift-tang-encryption-clevis.sample.yaml
  - 99-openshift-tang-encryption-ka.sample.yaml
  - 99-openshift-chrony.sample.yaml
+ - dnsmasq.conf
+ - path: /opt/hosts
+   origin: hosts
+ - haproxy.cfg
+ - radvd.conf
  scripts:
  - deploy.sh

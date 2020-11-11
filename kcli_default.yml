@@ -6,10 +6,10 @@ openshift_image: registry.svc.ci.openshift.org/ocp/release:4.6
 cluster: upi
 domain: karmalabs.com
 masters: 3
-workers: 0
+workers: 1
 keys: []
-api_ip:
-ingress_ip:
+api_ip: 2620:52:0:1302::2
+ingress_ip: 2620:52:0:1302::3
 image_url:
 network: default
 pool: default                                                                                                                                 
@@ -39,4 +39,4 @@ nbde: false
 ntp: false
 ntp_server: 0.rhel.pool.ntp.org
 tag: "4.6.1"
-machine_cidr: 2001:db8:dead:beef:fe::/96
+machine_cidr: 2620:52:0:1302::/64

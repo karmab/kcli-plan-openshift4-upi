@@ -1,0 +1,7 @@
+id:00:03:00:01:18:db:f2:8c:d5:92,openshift-bootstrap,[2620:52:0:1302::4]
+id:00:03:00:01:18:db:f2:8c:d5:92,openshift-master-0,[2620:52:0:1302::5]
+id:00:03:00:01:18:db:f2:8c:d5:9f,openshift-master-1,[2620:52:0:1302::6]
+id:00:03:00:01:18:db:f2:8c:d5:ac,openshift-master-2,[2620:52:0:1302::7]
+id:00:03:00:01:a0:36:9f:6c:0a:38,openshift-worker-0,[2620:52:0:1302::8]
+id:00:03:00:01:a0:36:9f:6c:0c:10,openshift-worker-1,[2620:52:0:1302::9]
+#id:00:03:00:01:a0:36:9f:d3:eb:ac,openshift-remote-worker-0,[2620:52:0:1303::5]
