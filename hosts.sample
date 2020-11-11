@@ -1,0 +1,8 @@
+{{ virtual_bootstrap_mac }},{{ cluster }}-bootstrap,[2620:52:0:1302::4]
+{%- for num in range(0, virtual_masters_number) %}
+{{ virtual_masters_mac_prefix + ":" + "%02.d" | format(num + 1)| string }},{{ cluster }}-master-0,[2620:52:0:1302::{{ 5 + num }}]
+{%- endfor %}
+{%- for num in range(0, virtual_workers_number) %}
+{{ virtual_workers_mac_prefix + ":" + "%02.d" | format(num + 1)| string }},{{ cluster }}-worker-0,[2620:52:0:1302::{{ 15 + num }}]
+{%- endfor %}
+#id:00:03:00:01:a0:36:9f:d3:eb:ac,openshift-remote-worker-0,[2620:52:0:1303::5]

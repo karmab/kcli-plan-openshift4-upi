@@ -1,4 +1,3 @@
-echo creating isos for you
 cluster={{ cluster }}
 dnf -y install httpd python3
 sed -i "s/Listen 80/Listen 8080/" /etc/httpd/conf/httpd.conf
@@ -10,6 +9,7 @@ then
 fi
 COREOSINSTALLER="podman run --privileged --rm -v /dev:/dev -v /run/udev:/run/udev -v $PWD:/data -w /data quay.io/coreos/coreos-installer:release"
 for role in bootstrap master worker; do
+ echo Creating iso for $role
  cp /root/ocp/$role.ign config.ign
  python3 create_iso_ignition.py 
  $COREOSINSTALLER iso ignition embed -fi iso.ign rhcos-live.x86_64.iso

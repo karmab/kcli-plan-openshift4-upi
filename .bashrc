@@ -14,3 +14,5 @@ export KUBECONFIG=/root/ocp/auth/kubeconfig
 export OPENSHIFT_INSTALL_RELEASE_IMAGE_OVERRIDE=$(cat /root/version.txt)
 export PATH=/usr/local/bin:/root/bin:$PATH
 alias coreos-installer='podman run --privileged --rm -v /dev:/dev -v /run/udev:/run/udev -v $PWD:/data -w /data quay.io/coreos/coreos-installer:release'
+alias openshift-install-bootstrap='openshift-install --dir ocp --log-level debug wait-for bootstrap-complete'
+alias openshift-install-complete='openshift-install --dir ocp --log-level debug wait-for install-complete'

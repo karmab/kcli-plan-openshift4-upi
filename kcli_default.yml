@@ -1,8 +1,9 @@
 info: |
-    This deploys a vm to be used for upi
+    This deploys a vm to be used for upi and ipv6
+    It runs dnsmasq, radvd and haproxy and generates iso files to use with ipi from openshift-install binary 
+    and using rhcos live iso
 image: centos8
 installer_mac:
-openshift_image: registry.svc.ci.openshift.org/ocp/release:4.6
 cluster: upi
 domain: karmalabs.com
 masters: 3
@@ -25,8 +26,8 @@ rhnregister: true
 rhnwait: 30
 ipmi_user: root
 ipmi_password: calvin
-baremetal_net: default
-provisioning_net: fakeipv6
+baremetal_net: baremetal
+provisioning_net: provisioning
 pullsecret: openshift_pull.json
 notifyscript: notify.sh
 virtual_bootstrap: true

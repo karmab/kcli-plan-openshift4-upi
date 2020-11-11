@@ -52,7 +52,7 @@ cat /root/temp.json | tr -d [:space:] > $PULL_SECRET
 oc adm release mirror -a $PULL_SECRET --from=${UPSTREAM_REGISTRY}/${RELEASE_NAME}:${OCP_RELEASE} --to-release-image=${LOCAL_REGISTRY}/{{ disconnected_prefix }}/release:${OCP_RELEASE} --to=${LOCAL_REGISTRY}/{{ disconnected_prefix }}
 echo "{\"auths\": {\"$REGISTRY_NAME:5000\": {\"auth\": \"$KEY\", \"email\": \"jhendrix@karmalabs.com\"}}}" > /root/temp.json
 OPENSHIFT_VERSION=$( grep cluster-openshift-apiserver-operator /var/log/cloud-init-output.log  | head -1 | awk '{print $NF}' | sed 's/-cluster-openshift-apiserver-operator//')
-echo $REGISTRY_NAME:5000/{{ disconnected_prefix }}/release:$OPENSHIFT_VERSION > /root/version.txt
+echo $REGISTRY_NAME:5000/{{ disconnected_prefix }}/release:$OCP_RELEASE > /root/version.txt
 
 cat << EOF >> /root/install-config.yaml
 imageContentSources:
@@ -66,3 +66,6 @@ EOF
 
 echo "additionalTrustBundle: |" >> /root/install-config.yaml
 sed -e 's/^/  /' /opt/registry/certs/domain.crt >>  /root/install-config.yaml
+
+PULLSECRET=$(cat /root/temp.json | tr -d [:space:])
+echo -e "pullSecret: |\n  $PULLSECRET" >> /root/install-config.yaml
