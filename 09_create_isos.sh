@@ -3,8 +3,6 @@ cluster={{ cluster }}
 yum -y install httpd python3
 sed -i "s/Listen 80/Listen 8080/" /etc/httpd/conf/httpd.conf
 systemctl enable --now httpd
-setenforce 0
-sed -i 's/SELINUX=.*/SELINUX=permissive/' /etc/selinux/config
 cd /root/
 if [ ! -f rhcos-live.x86_64.iso ]
 then
