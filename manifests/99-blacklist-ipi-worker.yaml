@@ -20,7 +20,11 @@ spec:
           Before=kubelet.service crio.service
           [Service]
           Type=oneshot
-          ExecStart=/bin/bash -c "REVERSE=$(dig -x $(hostname -I | cut -f1 ) +short) ; HOSTNAME=$(basename -s . $REVERSE) ; echo $HOSTNAME >/etc/hostname ; hostnamectl set-hostname $HOSTNAME"
+          ExecStart=/bin/bash -c "if [[ $(hostname) != *localhost* ]] ; then exit 0 ; fi ;\
+          	REVERSE=$(dig -x $(hostname -I | cut -f1 ) +short) ;\
+          	HOSTNAME=$(basename -s . $REVERSE) ;\
+          	echo $HOSTNAME >/etc/hostname ;\
+          	hostnamectl set-hostname $HOSTNAME"
           [Install]
           WantedBy=multi-user.target
     storage:

@@ -1,0 +1,18 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  name: nm-master
+  labels:
+    machineconfiguration.openshift.io/role: master
+spec:
+  config:
+    ignition:
+      version: 2.2.0
+    storage:
+      files:
+        - contents:
+            source: data:text/plain;charset=utf-8;base64,W21haW5dCnJjLW1hbmFnZXI9ZmlsZQpbY29ubmVjdGlvbl0KaXB2Ni5kaGNwLWR1aWQ9bGwKaXB2Ni5kaGNwLWlhaWQ9bWFjCltrZXlmaWxlXQpwYXRoPS9ldGMvTmV0d29ya01hbmFnZXIvc3lzdGVtLWNvbm5lY3Rpb25zLW1lcmdlZAo=
+            verification: {}
+          filesystem: root
+          mode: 420
+          path: /etc/NetworkManager/conf.d/99-upi.conf
