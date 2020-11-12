@@ -12,6 +12,8 @@ echo nameserver $(hostname -I | cut -d' ' -f1) > /etc/resolv.conf
 echo search {{ cluster }}.{{ domain }} >> /etc/resolv.conf
 chattr +i /etc/resolv.conf
 cp /root/radvd.conf /etc
+sysctl -w net.ipv6.conf.all.forwarding=1
+sysctl -w net.ipv6.conf.eth1.accept_ra=2
 cp /root/haproxy.cfg /etc/haproxy
 systemctl enable --now dnsmasq
 systemctl enable --now radvd
