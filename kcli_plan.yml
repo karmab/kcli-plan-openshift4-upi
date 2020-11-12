@@ -86,10 +86,13 @@
  - 03_network.sh
  - 04_get_clients.sh
  - 05_disconnected.sh
- - 06_nbde.sh
- - 07_ntp.sh
- - 08_deploy_openshift.sh
- - 09_create_isos.sh
+{% if olm %}
+ - 06_olm.sh
+{% endif %}
+ - 07_nbde.sh
+ - 08_ntp.sh
+ - 09_deploy_openshift.sh
+ - 10_create_isos.sh
  - install-config.yaml                                                                                                                           
  - .bashrc
  - iso.sh
