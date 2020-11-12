@@ -1,0 +1,5 @@
+virtual_masters: true
+virtual_workers: true
+virtual_workers_number: 2
+provisioning_net: fakeipv6
+baremetal_net: default
