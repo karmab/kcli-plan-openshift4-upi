@@ -3,7 +3,7 @@
 curl -Ls https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 > /usr/bin/jq	
 chmod u+x /usr/bin/jq
 
-curl -k --silent https://mirror.openshift.com/pub/openshift-v4/clients/oc/4.6/linux/oc.tar.gz > oc.tar.gz
+curl -k -s https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz > oc.tar.gz
 tar zxf oc.tar.gz
 rm -rf oc.tar.gz
 mv oc /usr/bin
