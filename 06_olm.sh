@@ -14,14 +14,14 @@ export LOCAL_REGISTRY_IMAGE_TAG=olm
 podman login -u '{{ disconnected_user }}' -p '{{ disconnected_password }}' $LOCAL_REGISTRY
 podman login -u '{{ config_rhnuser }}' -p '{{ config_rhnpassword }}' registry.redhat.io
 
-#which opm >/dev/null 2>&1
-#if [ "$?" != "0" ] ; then
+which opm >/dev/null 2>&1
+if [ "$?" != "0" ] ; then
 export REPO="operator-framework/operator-registry"
 export VERSION=$(curl -s https://api.github.com/repos/$REPO/releases | grep tag_name | grep -v -- '-rc' | head -1 | awk -F': ' '{print $2}' | sed 's/,//' | xargs)
 echo "Using Opm Version $VERSION"
 curl -Lk https://github.com/operator-framework/operator-registry/releases/download/$VERSION/linux-amd64-opm > /usr/bin/opm
 chmod u+x /usr/bin/opm
-#fi
+fi
 
 # Set these values to true for the catalog and miror to be created
 export RH_OP='true'
