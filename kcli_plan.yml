@@ -92,8 +92,7 @@
  - 07_nbde.sh
  - 08_ntp.sh
  - 09_deploy_openshift.sh
- - path: /root/bin/create_isos.sh
-   origin: helpers/create_isos.sh
+ - 10_create_isos.sh
  - path: /root/bin/fix_disconnected_packages.sh
    origin: helpers/fix_disconnected_packages.sh
  - path: /root/bin/small_iso.sh
