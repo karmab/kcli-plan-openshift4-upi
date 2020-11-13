@@ -10,7 +10,7 @@ MCP="worker"
 IGNITION_FILE="http://$IP:$PORT/$MCP.ign"
 OUTPUT="$WEBDIR/{{ cluster }}-$MCP-small.iso"
 # KERNEL_ARGS="ip=192.168.122.211::192.168.122.1:255.255.255.0:biloute.karmalabs.com:ens3:on:8.8.8.8"
-EXTRA_ARGS=""
+KERNEL_ARGS=""
 
 yum -y install git mkisofs
 BASE="/tmp/base.iso"
@@ -28,4 +28,4 @@ rm -rf /tmp/base.iso $OUTPUT /tmp/syslinux* /tmp/coreos ztp-iso-generator
 git clone https://github.com/redhat-ztp/ztp-iso-generator.git
 cd ztp-iso-generator/rhcos-iso
 ./generate_rhcos_iso.sh $BASE
-./inject_config_files.sh $BASE $OUTPUT $IGNITION_FILE $ROOTFS "$EXTRA_ARGS"
+./inject_config_files.sh $BASE $OUTPUT $IGNITION_FILE $ROOTFS "$KERNEL_ARGS"
