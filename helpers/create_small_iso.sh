@@ -1,11 +1,12 @@
 #!/bin/bash
 
 IP=$(hostname -I | cut -f1 -d" ")
-API_IP="api.{{ cluster }}.{{ domain }}"
+PORT=8080
+API_ENDPOINT="api.{{ cluster }}.{{ domain }}"
 WEBDIR="/var/www/html"
-ROOTFS="http://$IP/rootfs.img"
+ROOTFS="http://$IP:$PORT/rootfs.img"
 MCP="worker"
-IGNITION_FILE="http://$IP/$MCP.ign"
+IGNITION_FILE="http://$IP:$PORT/$MCP.ign"
 OUTPUT="$WEBDIR/$MCP-small.iso"
 # KERNEL_ARGS="ip=192.168.122.211::192.168.122.1:255.255.255.0:biloute.karmalabs.com:ens3:on:8.8.8.8"
 EXTRA_ARGS=""
@@ -17,7 +18,7 @@ then
 fi
 
 # cp /root/ocp/worker.ign /var/www/html/worker.ign
-curl -H "Accept: application/vnd.coreos.ignition+json; version=3.1.0" -Lk https://$API_IP:22623/config/$MCP > config.ign
+curl -H "Accept: application/vnd.coreos.ignition+json; version=3.1.0" -Lk https://$API_ENDPOINT:22623/config/$MCP > config.ign
 # use jq or other tools here if tweaking $MCP.ign is needed (for static networking for instance) and move result to web dir
 mv config.ign $WEBDIR
 
