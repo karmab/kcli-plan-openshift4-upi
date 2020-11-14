@@ -64,7 +64,7 @@
  keys: {{ keys }}
 {%- if 'rhel' in image %}
  rhnregister: {{ rhnregister }}
- networkwait: {{ rhnwait }}
+ networkwait: {{ networkwait }}
 {%- endif %}
  memory: {{ memory }}
  notify: {{ notify }}
@@ -72,12 +72,12 @@
  nets:                                                                                                                                         
  - name: {{ baremetal_net }}
  - name: {{ provisioning_net }}
-   ip: {{ installer_ip }}
-   mask: {{ installer_mask }}
-   gateway: {{ installer_gateway }}
+   ip: {{ machine_cidr|network_ip(1) }}
+   mask: {{ machine_cidr.split('/')[1] }}
+   gateway: {{ machine_cidr|network_ip(1)}}
    vips:
-   - {{ api_ip }}
-   - {{ ingress_ip }}
+   - {{ machine_cidr|network_ip(2) }}
+   - {{ machine_cidr|network_ip(3) }}
  disks:
  - {{ disk_size }}
  files:

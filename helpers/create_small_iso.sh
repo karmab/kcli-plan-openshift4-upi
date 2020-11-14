@@ -1,7 +1,7 @@
 #!/bin/bash
 
-IP={{ installer_ip }}
-echo $IP | grep ':' && IP=[$IP]
+IP={{ machine_cidr|network_ip(1) }}
+echo $IP | grep -q ':' && IP=[$IP]
 PORT=8080
 API_ENDPOINT="api.{{ cluster }}.{{ domain }}"
 WEBDIR="/var/www/html"
@@ -9,8 +9,8 @@ ROOTFS="http://$IP:$PORT/rootfs.img"
 MCP="worker"
 IGNITION_FILE="http://$IP:$PORT/$MCP.ign"
 OUTPUT="$WEBDIR/{{ cluster }}-$MCP-small.iso"
-# KERNEL_ARGS="ip=192.168.122.211::192.168.122.1:255.255.255.0:biloute.karmalabs.com:ens3:on:8.8.8.8"
-KERNEL_ARGS=""
+#KERNEL_ARGS="ip=[2620:52:0:1302::40]::[2620:52:0:1302::1]:64:bigpaja.karmalabs.com:ens3:none nameserver=[2620:52:0:1302::1]"
+KERNEL_ARGS="coreos.inst.install_dev=vda coreos.inst=yes"
 
 yum -y install git mkisofs
 BASE="/tmp/base.iso"

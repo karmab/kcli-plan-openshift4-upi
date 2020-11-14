@@ -5,7 +5,7 @@ systemctl enable --now httpd
 cd /root/
 if [ ! -f rhcos-live.x86_64.iso ]
 then
-  curl -Lk https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/4.6.1/rhcos-live.x86_64.iso > rhcos-live.x86_64.iso
+  curl -Lk https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/latest/rhcos-live.x86_64.iso > rhcos-live.x86_64.iso
 fi
 COREOSINSTALLER="podman run --privileged --rm -v /dev:/dev -v /run/udev:/run/udev -v $PWD:/data -w /data quay.io/coreos/coreos-installer:release"
 for role in bootstrap master worker; do

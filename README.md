@@ -29,8 +29,7 @@ Because it was time to do some upi messing around
 
 Prepare a valid parameter file with the information needed. At least, you need to specify the following elements:
 
-- api_ip
-- ingress_ip
+- machine_cidr
 
 Call the resulting file `kcli_parameters.yml` to avoid having to specify it in the creation command.
 
@@ -45,18 +44,12 @@ kcli create plan
 |Parameter                 |Default Value      |
 |--------------------------|-------------------|
 |image                     |centos8            |
-|installer_mac             |None               |
 |cluster                   |upi                |
 |domain                    |karmalabs.com      |
 |masters                   |3                  |
 |workers                   |1                  |
 |keys                      |[]                 |
 |machine_cidr              |2620:52:0:1302::/64|
-|installer_ip              |2620:52:0:1302::1  |
-|installer_mask            |64                 |
-|installer_gateway         |2620:52:0:1302::1  |
-|api_ip                    |2620:52:0:1302::2  |
-|ingress_ip                |2620:52:0:1302::3  |
 |image_url                 |None               |
 |network                   |default            |
 |pool                      |default            |
@@ -95,4 +88,4 @@ kcli create plan
 |nbde                      |False              |
 |ntp                       |False              |
 |ntp_server                |0.rhel.pool.ntp.org|
-|tag                       |4.6.1              |
+|tag                       |4.6.3              |

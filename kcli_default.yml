@@ -3,18 +3,12 @@ info: |
     It runs dnsmasq, radvd and haproxy and generates iso files to use with ipi from openshift-install binary 
     and using rhcos live iso
 image: centos8
-installer_mac:
 cluster: upi
 domain: karmalabs.com
 masters: 3
 workers: 0
 keys: []
 machine_cidr: 2620:52:0:1302::/64
-installer_ip: 2620:52:0:1302::1
-installer_mask: 64
-installer_gateway: 2620:52:0:1302::1
-api_ip: 2620:52:0:1302::2
-ingress_ip: 2620:52:0:1302::3
 image_url:
 network: default
 pool: default                                                                                                                                 
@@ -23,9 +17,7 @@ memory: 32768
 disk_size: 30
 extra_disks: []
 rhnregister: true
-rhnwait: 30
-ipmi_user: root
-ipmi_password: calvin
+networkwait: 30
 baremetal_net: baremetal
 provisioning_net: provisioning
 pullsecret: openshift_pull.json
