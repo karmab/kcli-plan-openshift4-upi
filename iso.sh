@@ -1,5 +1,8 @@
 #!/bin/bash
 firstboot_args='console=tty0 rd.neednet=1'
+#network_args='ip=[2620:52:0:1302::41]::[2620:52:0:1302::1]:64:jhendrix.fender.com:ens3:none nameserver=[2620:52:0:1302::1]'
+firstboot_args="$firstboot_args $network_args"
+
 for vg in $(vgs -o name --noheadings) ; do vgremove -y $vg ; done
 for pv in $(pvs -o name --noheadings) ; do pvremove -y $pv ; done
 if [ -b /dev/vda ]; then
