@@ -5,6 +5,7 @@ info: |
 image: centos8
 cluster: upi
 domain: karmalabs.com
+network_type: OVNKubernetes
 masters: 3
 workers: 0
 keys: []
