@@ -17,9 +17,9 @@
 {%- for size in [disk_size] + extra_disks %}
   - {{ size }}
 {%- endfor %}
-{%- endif %}
+{% endif %}
 
-{% if virtual_masters %}
+{%- if virtual_masters %}
 {%- for num in range(0, virtual_masters_number) %}
 {{ cluster }}-master-{{ num }}:
  pool: {{ pool }}
@@ -35,10 +35,10 @@
 {%- for size in [disk_size] + extra_disks %}
   - {{ size }}
 {%- endfor %}
-{%- endfor %}
-{%- endif %}
+{% endfor %}
+{% endif %}
 
-{% if virtual_workers %}
+{%- if virtual_workers %}
 {%- for num in range(0, virtual_workers_number) %}
 {{ cluster }}-worker-{{ num }}:
  pool: {{ pool }}
@@ -54,8 +54,8 @@
 {%- for size in [disk_size] + extra_disks %}
   - {{ size }}
 {%- endfor %}
-{%- endfor %}
-{%- endif %}
+{% endfor %}
+{% endif %}
 
 {{ cluster }}-installer: 
  image: {{ image }} 
@@ -64,8 +64,8 @@
  keys: {{ keys }}
 {%- if 'rhel' in image %}
  rhnregister: {{ rhnregister }}
- networkwait: {{ networkwait }}
 {%- endif %}
+ networkwait: {{ networkwait }}
  memory: {{ memory }}
  notify: {{ notify }}
  notifyscript: {{ notifyscript }}
@@ -86,9 +86,9 @@
  - 03_network.sh
  - 04_get_clients.sh
  - 05_disconnected.sh
-{% if olm %}
+{%- if olm %}
  - 06_olm.sh
-{% endif %}
+{%- endif %}
  - 07_nbde.sh
  - 08_ntp.sh
  - 09_deploy_openshift.sh

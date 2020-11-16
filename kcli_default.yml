@@ -14,11 +14,13 @@ network: default
 pool: default                                                                                                                                 
 numcpus: 16   
 memory: 32768
-disk_size: 30
+disk_size: 80
 extra_disks: []
 rhnregister: true
 networkwait: 30
 baremetal_net: baremetal
+baremetal_vips: []
+baremetal_workers: []
 provisioning_net: provisioning
 pullsecret: openshift_pull.json
 notifyscript: notify.sh

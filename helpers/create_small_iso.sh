@@ -12,7 +12,7 @@ OUTPUT="$WEBDIR/{{ cluster }}-$MCP-small.iso"
 #KERNEL_ARGS="ip=[2620:52:0:1302::40]::[2620:52:0:1302::1]:64:bigpaja.karmalabs.com:ens3:none nameserver=[2620:52:0:1302::1]"
 KERNEL_ARGS="coreos.inst.install_dev=vda coreos.inst=yes coreos.inst.ignition_url=$IGNITION_FILE"
 
-yum -y install git mkisofs
+yum -y install git mkisofs syslinux
 BASE="/tmp/base.iso"
 if [ ! -f $WEBDIR/rootfs.img ]
 then

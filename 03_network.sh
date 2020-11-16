@@ -1,11 +1,14 @@
 setenforce 0
 sed -i 's/SELINUX=.*/SELINUX=permissive/' /etc/selinux/config
-# nmcli con mod baremetal.153 +ipv6.addresses 2620:52:0:1303::3/64
-# nmcli con mod baremetal.153 +ipv6.addresses 2620:52:0:1303::3/64
+{%- if baremetal_vips %}
+PREFIX=$(ip a l  eth0 | grep inet | head -1 | awk '{print $2}' | cut -d/ -f2)
+{%- for vip in baremetal_vips %}
+nmcli con mod "System eth0" +ipv4.addresses {{ vip }}/$PREFIX
+{%- endfor %}
+nmcli conn up "System eth0"
+{%- endip %}
 dnf -y install dnsmasq radvd haproxy
 cp /root/dnsmasq.conf /etc
-# touch /opt/leases
-# chmod 777 /opt/leases
 cp /etc/resolv.conf /opt
 chmod 755 /opt/resolv.conf
 echo nameserver $(hostname -I | cut -d' ' -f1) > /etc/resolv.conf
