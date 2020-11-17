@@ -6,5 +6,5 @@ id:00:03:00:01:{{ virtual_masters_mac_prefix + ":" + "%02.d" | format(num + 1)| 
 id:00:03:00:01:{{ virtual_workers_mac_prefix + ":" + "%02.d" | format(num + 1)| string }},{{ cluster }}-worker-{{ num }},[{{ machine_cidr|network_ip(16 + num) }}]
 {%- endfor %}
 {%- for worker in baremetal_workers %}
-{{ worker['duid']| default('id:00:03:00:02') }}:{{ worker['mac'] }},{{ cluster }}-baremetalworker-{{ loop.index }},[{{ machine_cidr|network_ip(36 + loop.index) }}]
+{{ worker['duid']| default('id:00:03:00:01') }}:{{ worker['mac'] }},{{ cluster }}-bmworker-{{ loop.index }},[{{ machine_cidr|network_ip(36 + loop.index) }}]
 {%- endfor %}
