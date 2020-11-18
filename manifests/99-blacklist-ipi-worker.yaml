@@ -20,11 +20,13 @@ spec:
           Before=kubelet.service crio.service
           [Service]
           Type=oneshot
-          ExecStart=/bin/bash -c "if [[ $(hostname) != *localhost* ]] ; then exit 0 ; fi ;\
-          	REVERSE=$(dig -x $(hostname -I | cut -f1 ) +short) ;\
-          	HOSTNAME=$(basename -s . $REVERSE) ;\
-          	echo $HOSTNAME >/etc/hostname ;\
-          	hostnamectl set-hostname $HOSTNAME"
+          ExecStart=/bin/bash -c "if [[ $(hostname) == *localhost* ]]; then ;\
+             REVERSE=$(dig -x $(hostname -I | cut -f1 -d\ ) +short) ;\
+             HOSTNAME=${REVERSE::-1} ;\
+             echo $HOSTNAME > /etc/hostname ;\
+             nmcli general hostname $HOSTNAME ;\
+             systemctl restart systemd-hostnamed ;\
+             else echo Hostname properly set; exit 0 ; fi"
           [Install]
           WantedBy=multi-user.target
     storage:
