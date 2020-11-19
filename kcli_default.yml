@@ -25,6 +25,9 @@ baremetal_workers: []
 provisioning_net: provisioning
 pullsecret: openshift_pull.json
 notifyscript: notify.sh
+dnsmasq: true
+radvd: true
+haproxy: true
 virtual_bootstrap: true
 virtual_bootstrap_numcpus: 8
 virtual_bootstrap_memory: 16384
@@ -41,10 +44,13 @@ virtual_workers_memory: 16384
 virtual_workers_mac_prefix: aa:aa:aa:bb:bb
 notify: true
 deploy: true
+disconnected: true
 disconnected_user: dummy
 disconnected_password: dummy
 disconnected_origin: quay.io
 disconnected_prefix: ocp4
+disconnected_url: 
+ca:
 nbde: false
 ntp: false
 olm: false

@@ -2,7 +2,9 @@ bash /root/01_patch_installconfig.sh
 bash /root/02_packages.sh
 bash /root/03_network.sh
 /root/04_get_clients.sh
+{% if disconnected %}
 /root/05_disconnected.sh
+{% endif %}
 {% if olm %}
 /root/06_olm.sh
 {% endif %}

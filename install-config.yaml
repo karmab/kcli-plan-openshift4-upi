@@ -26,3 +26,16 @@ controlPlane:
   replicas: {{ masters }}
 platform:
   none: {}
+{% if ca != None -%}
+additionalTrustBundle: |
+ {{ ca | replace('\n', '\n ') }}
+{%- endif %}
+{% if disconnected_url != None -%}
+imageContentSources:
+- mirrors:
+  - {{ disconnected_url }}/{{ disconnected_prefix }}
+  source: quay.io/openshift-release-dev/ocp-v4.0-art-dev
+- mirrors:
+  - {{ disconnected_url }}/{{ disconnected_prefix }}
+  source: {{ disconnected_origin }}/ocp/release
+{%- endif %}
