@@ -10,6 +10,7 @@ masters: 3
 workers: 0
 keys: []
 machine_cidr: 2620:52:0:1302::/64
+static_ip: true
 image_url:
 network: default
 pool: default                                                                                                                                 
@@ -19,8 +20,12 @@ disk_size: 80
 extra_disks: []
 rhnregister: true
 networkwait: 30
+fake_network: false
 baremetal_net: baremetal
+ipmi_user: root
+ipmi_password: root
 baremetal_vips: []
+baremetal_masters: []
 baremetal_workers: []
 provisioning_net: provisioning
 pullsecret: openshift_pull.json
@@ -45,6 +50,7 @@ virtual_workers_mac_prefix: aa:aa:aa:bb:bb
 notify: true
 deploy: true
 disconnected: true
+disconnected_registry_image: "quay.io/saledort/registry:2"
 disconnected_user: dummy
 disconnected_password: dummy
 disconnected_origin: quay.io
@@ -55,4 +61,6 @@ nbde: false
 ntp: false
 olm: false
 ntp_server: 0.rhel.pool.ntp.org
-tag: 4.6.3
+tag: 4.6.4
+build: false
+openshift_install_url: https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable/openshift-install-linux.tar.gz

@@ -2,6 +2,14 @@
  type: image
  url: {{ image_url }}
 
+{% if fake_network %}
+{{ provisioning_net }}:
+ type: network
+ cidr: 172.24.0.0/24
+ dhcp: False
+ isolated: true
+{% endif %}
+
 {% if virtual_bootstrap %}
 {{ cluster }}-bootstrap:
  pool: {{ pool }} 
@@ -67,6 +75,7 @@
 {%- endif %}
  networkwait: {{ networkwait }}
  memory: {{ memory }}
+ privatekey: true
  notify: {{ notify }}
  notifyscript: {{ notifyscript }}
  nets:                                                                                                                                         
@@ -86,17 +95,18 @@
  - 03_network.sh
  - 04_get_clients.sh
  - 05_disconnected.sh
-{%- if olm %}
  - 06_olm.sh
-{%- endif %}
  - 07_nbde.sh
  - 08_ntp.sh
  - 09_deploy_openshift.sh
  - 10_create_isos.sh
+ - 11_launch_install.sh
  - path: /root/bin/fix_disconnected_packages.sh
    origin: helpers/fix_disconnected_packages.sh
  - path: /root/bin/small_iso.sh
    origin: helpers/create_small_iso.sh
+ - path: /root/bin/racadm.sh
+   origin: helpers/racadm.sh
  - install-config.yaml                                                                                                                           
  - .bashrc
  - iso.sh
