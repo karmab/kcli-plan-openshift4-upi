@@ -17,6 +17,7 @@ mycli:
 """ > /root/.kcli/config.yml 
 IP="$(hostname -I | cut -f1 -d" " | xargs)"
 for role in bootstrap master worker ; do
+  kcli delete image -p $pool $cluster-$role.iso
   kcli download image -u http://$IP:8080/$cluster-$role.iso -p $pool $cluster-$role.iso
 done
 kcli start plan {{ plan }}
