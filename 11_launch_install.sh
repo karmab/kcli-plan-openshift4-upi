@@ -1,4 +1,5 @@
 cluster={{ cluster }}
+pool={{ pool }}
 {%- for node in baremetal_masters %}
 /root/bin/racadm.sh {{ cluster }} master {{ node['ipmi_address'] }} {{ node['ipmi_user'] | default(ipmi_user) }} {{ node['ipmi_password'] | default(ipmi_password) }}
 {%- endfor %}
@@ -16,6 +17,6 @@ mycli:
 """ > /root/.kcli/config.yml 
 IP="$(hostname -I | cut -f1 -d" " | xargs)"
 for role in bootstrap master worker ; do
-  kcli download image -u http://$IP:8080/$cluster-$role.iso $cluster-$role.iso
+  kcli download image -u http://$IP:8080/$cluster-$role.iso -p $pool $cluster-$role.iso
 done
 kcli start plan {{ plan }}
