@@ -98,9 +98,10 @@
  - 06_olm.sh
  - 07_nbde.sh
  - 08_ntp.sh
- - 09_deploy_openshift.sh
- - 10_create_isos.sh
- - 11_launch_install.sh
+ - 09_nm.sh
+ - 10_deploy_openshift.sh
+ - 11_create_isos.sh
+ - 12_launch_install.sh
  - path: /root/bin/fix_disconnected_packages.sh
    origin: helpers/fix_disconnected_packages.sh
  - path: /root/bin/small_iso.sh
@@ -119,6 +120,7 @@
  - 99-openshift-tang-encryption-clevis.sample.yaml
  - 99-openshift-tang-encryption-ka.sample.yaml
  - 99-openshift-chrony.sample.yaml
+ - 99-nm.sample.yaml
  - dnsmasq.conf
  - path: /opt/hosts
    origin: hosts

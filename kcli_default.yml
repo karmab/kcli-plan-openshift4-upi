@@ -21,6 +21,7 @@ extra_disks: []
 rhnregister: true
 networkwait: 30
 fake_network: false
+disable_nics: []
 baremetal_net: baremetal
 ipmi_user: root
 ipmi_password: calvin

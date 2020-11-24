@@ -18,10 +18,11 @@ bash /root/bin/build.sh
 /root/08_ntp.sh
 {% endif %}
 
+bash /root/09_nm.sh
 export KUBECONFIG=/root/ocp/auth/kubeconfig
-bash /root/09_deploy_openshift.sh
-bash /root/10_create_isos.sh
+bash /root/10_deploy_openshift.sh
+bash /root/11_create_isos.sh
 
 {% if deploy %}
-bash /root/11_launch_install.sh
+bash /root/12_launch_install.sh
 {% endif %}
