@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 # Variables to set, suit to your installation
 cd /root
 export OCP_RELEASE="4.6"
