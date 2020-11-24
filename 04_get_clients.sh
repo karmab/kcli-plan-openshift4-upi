@@ -13,9 +13,17 @@ curl -L https://storage.googleapis.com/kubernetes-release/release/$(curl -s http
 chmod u+x /usr/bin/kubectl
 
 curl -Lk https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/latest/rhcos-live.x86_64.iso > /root/rhcos-live.x86_64.iso
-curl -Lk {{ openshift_install_url }} > openshift-install-linux.tar.gz
+{% if openshift_image != None %}
+export PULL_SECRET="/root/openshift_pull.json"
+export OPENSHIFT_RELEASE_IMAGE="{{ openshift_image }}"
+oc adm release extract --registry-config $PULL_SECRET --command=oc --to /tmp $OPENSHIFT_RELEASE_IMAGE
+mv /tmp/oc /usr/bin
+oc adm release extract --registry-config $PULL_SECRET --command=openshift-install --to /usr/bin $OPENSHIFT_RELEASE_IMAGE
+{% else %}
+curl -Lk https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable/openshift-install-linux.tar.gz > openshift-install-linux.tar.gz
 tar zxvf openshift-install-linux.tar.gz
 rm -rf openshift-install-linux.tar.gz
+{% endif %}
 mv openshift-install /usr/bin
 chmod +x /usr/bin/openshift-install
 

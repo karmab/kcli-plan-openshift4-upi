@@ -5,6 +5,7 @@ info: |
 image: centos8
 cluster: upi
 domain: karmalabs.com
+openshift_image: 
 network_type: OVNKubernetes
 masters: 3
 workers: 0
@@ -64,4 +65,3 @@ olm: false
 ntp_server: 0.rhel.pool.ntp.org
 tag: 4.6.4
 build: false
-openshift_install_url: https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable/openshift-install-linux.tar.gz
