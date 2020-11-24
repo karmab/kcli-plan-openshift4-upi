@@ -12,7 +12,13 @@ export LOCAL_REGISTRY_IMAGE_TAG=olm
 
 # Login registries
 podman login -u '{{ disconnected_user }}' -p '{{ disconnected_password }}' $LOCAL_REGISTRY
+{% if config_rhnuser|default('XXX') == 'XXX' or config_rhnpassword|default('XXX') == 'XXX' -%}
+echo "You need to authenticate to registry.redhat.io and remove the exit 1 line from this script"
+echo podman login -u XXX -p XXX registry.redhat.io
+exit 1
+{%- else %}
 podman login -u '{{ config_rhnuser }}' -p '{{ config_rhnpassword }}' registry.redhat.io
+{%- endif %}
 
 which opm >/dev/null 2>&1
 if [ "$?" != "0" ] ; then
