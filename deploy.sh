@@ -29,4 +29,7 @@ bash /root/11_create_big_isos.sh
 
 {% if deploy %}
 bash /root/12_launch_install.sh
+{% if olm %}
+bash /root/13_fix_disconnected_packages.sh
+{% endif %}
 {% endif %}

@@ -9,7 +9,7 @@ ROOTFS="http://$IP:$PORT/rootfs.img"
 MCP="worker"
 IGNITION_FILE="http://$IP:$PORT/$MCP.ign"
 OUTPUT="$WEBDIR/{{ cluster }}-$MCP-small.iso"
-#KERNEL_ARGS="ip=[2620:52:0:1302::40]::[2620:52:0:1302::1]:64:bigpaja.karmalabs.com:ens3:none nameserver=[2620:52:0:1302::1]"
+#KERNEL_ARGS="ip=[2620:52:0:1302::40]::[2620:52:0:1302::1]:64:hendrix.karmalabs.com:ens3:none nameserver=[2620:52:0:1302::1]"
 KERNEL_ARGS="coreos.inst.install_dev=vda coreos.inst=yes coreos.inst.ignition_url=$IGNITION_FILE"
 
 yum -y install git mkisofs syslinux

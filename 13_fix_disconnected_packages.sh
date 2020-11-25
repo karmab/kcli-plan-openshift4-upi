@@ -11,3 +11,4 @@ for packagemanifest in $(oc get packagemanifest -n openshift-marketplace -o name
     skopeo copy docker://$package docker://$REGISTRY/$PREFIX/openshift4-$(basename $package) --all --authfile $PULL_SECRET
   done
 done
+oc patch OperatorHub cluster --type json -p '[{"op": "add", "path": "/spec/disableAllDefaultSources", "value": true}]'
