@@ -61,7 +61,7 @@ disconnected_url:
 ca:
 nbde: false
 ntp: false
-olm: false
+olm: true
 ntp_server: 0.rhel.pool.ntp.org
 tag: 4.6.4
 build: false

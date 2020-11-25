@@ -18,7 +18,7 @@ We also use custom isos to drive the installation in an automated way
 ### for kcli
 
 - kcli installed (for rhel8/cento8/fedora, look [here](https://kcli.readthedocs.io/en/latest/#package-install-method))
-- an openshift pull secret (stored by default in openshift_pull.json)
+- an openshift pull secret (stored by default in openshift_pull.json), containing secret for registry.redhat.io and for ci if needed
 
 ### on the provisioning node
 
@@ -106,7 +106,7 @@ kcli create plan
 |ca                         |None                                                                                              |
 |nbde                       |False                                                                                             |
 |ntp                        |False                                                                                             |
-|olm                        |False                                                                                             |
+|olm                        |True                                                                                              |
 |ntp_server                 |0.rhel.pool.ntp.org                                                                               |
 |tag                        |4.6.4                                                                                             |
 |build                      |False                                                                                             |

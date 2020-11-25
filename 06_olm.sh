@@ -12,7 +12,11 @@ export LOCAL_REGISTRY_IMAGE_TAG=olm
 
 # Login registries
 podman login -u '{{ disconnected_user }}' -p '{{ disconnected_password }}' $LOCAL_REGISTRY
-podman login registry.redhat.io --authfile /root/openshift_pull.json
+#podman login registry.redhat.io --authfile /root/openshift_pull.json
+REDHAT_CREDS=$(cat /root/openshift_pull.json | jq .auths.\"registry.redhat.io\".auth -r | base64 -d)
+RHN_USER=$(echo $REDHAT_CREDS | cut -d: -f1)
+RHN_PASSWORD=$(echo $REDHAT_CREDS | cut -d: -f2)
+podman login -u "$RHN_USER" -p "$RHN_PASSWORD" registry.redhat.io
 
 which opm >/dev/null 2>&1
 if [ "$?" != "0" ] ; then
