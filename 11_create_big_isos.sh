@@ -1,8 +1,9 @@
 cluster={{ cluster }}
+
+cd /root/
 dnf -y install httpd python3
 sed -i "s/Listen 80/Listen 8080/" /etc/httpd/conf/httpd.conf
 systemctl enable --now httpd
-cd /root/
 if [ ! -f rhcos-live.x86_64.iso ]
 then
   curl -Lk https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/latest/rhcos-live.x86_64.iso > rhcos-live.x86_64.iso

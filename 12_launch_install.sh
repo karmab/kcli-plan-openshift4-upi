@@ -1,3 +1,4 @@
+export HOME=/root
 cluster={{ cluster }}
 pool={{ pool }}
 {%- for node in baremetal_masters %}
@@ -23,4 +24,3 @@ done
 kcli start plan {{ plan }}
 openshift-install --dir /root/ocp --log-level debug wait-for bootstrap-complete
 openshift-install --dir /root/ocp --log-level debug wait-for install-complete && kcli delete --yes $cluster-bootstrap
-

@@ -20,8 +20,12 @@ bash /root/bin/build.sh
 
 bash /root/09_nm.sh
 export KUBECONFIG=/root/ocp/auth/kubeconfig
-bash /root/10_deploy_openshift.sh
-bash /root/11_create_isos.sh
+bash /root/10_deploy_openshift_assets.sh
+{% if small_iso %}
+bash /root/11_create_small_isos.sh
+{% else %}
+bash /root/11_create_big_isos.sh
+{% endif %}
 
 {% if deploy %}
 bash /root/12_launch_install.sh

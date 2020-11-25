@@ -65,3 +65,4 @@ olm: false
 ntp_server: 0.rhel.pool.ntp.org
 tag: 4.6.4
 build: false
+small_iso: false

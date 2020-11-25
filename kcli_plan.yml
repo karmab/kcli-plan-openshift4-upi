@@ -99,8 +99,9 @@
  - 07_nbde.sh
  - 08_ntp.sh
  - 09_nm.sh
- - 10_deploy_openshift.sh
- - 11_create_isos.sh
+ - 10_deploy_openshift_assets.sh
+ - 11_create_big_isos.sh
+ - 11_create_small_isos.sh
  - 12_launch_install.sh
  - path: /root/bin/fix_disconnected_packages.sh
    origin: helpers/fix_disconnected_packages.sh
