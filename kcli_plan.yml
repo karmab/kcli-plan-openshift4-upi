@@ -104,6 +104,7 @@
  - 11_create_small_isos.sh
  - 12_launch_install.sh
  - 13_fix_disconnected_packages.sh
+ - 14_deploy_operators.sh
  - path: /root/bin/small_iso.sh
    origin: helpers/create_small_iso.sh
  - path: /root/bin/racadm.sh
@@ -127,5 +128,7 @@
    mode: 755
  - haproxy.cfg
  - radvd.conf
+ - path: /root/operators
+   origin: operators
  scripts:
  - deploy.sh

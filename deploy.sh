@@ -31,5 +31,6 @@ bash /root/11_create_big_isos.sh
 bash /root/12_launch_install.sh
 {% if olm %}
 bash /root/13_fix_disconnected_packages.sh
+bash /root/14_deploy_operators.sh
 {% endif %}
 {% endif %}
