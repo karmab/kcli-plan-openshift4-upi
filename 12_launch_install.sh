@@ -23,4 +23,4 @@ for role in bootstrap master worker ; do
 done
 kcli start plan {{ plan }}
 openshift-install --dir /root/ocp --log-level debug wait-for bootstrap-complete
-openshift-install --dir /root/ocp --log-level debug wait-for install-complete && kcli delete --yes $cluster-bootstrap
+openshift-install --dir /root/ocp --log-level debug wait-for install-complete && kcli delete vm --yes $cluster-bootstrap
