@@ -109,6 +109,8 @@
    origin: helpers/create_small_iso.sh
  - path: /root/bin/racadm.sh
    origin: helpers/racadm.sh
+ - path: /root/bin/sync_image.sh
+   origin: helpers/sync_image.sh
  - install-config.yaml                                                                                                                           
  - .bashrc
  - iso.sh
