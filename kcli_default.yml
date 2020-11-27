@@ -70,3 +70,4 @@ olm_operators:
 - performance-addon-operator
 - ptp-operator
 - sriov-network-operator
+extra_images: []

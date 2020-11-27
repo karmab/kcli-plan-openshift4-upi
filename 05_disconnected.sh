@@ -81,3 +81,7 @@ sed -e 's/^/  /' /opt/registry/certs/domain.crt >>  /root/install-config.yaml
 
 PULLSECRET=$(cat /root/temp.json | tr -d [:space:])
 echo -e "pullSecret: |\n  $PULLSECRET" >> /root/install-config.yaml
+
+{% for image in extra_images -%}
+/root/bin/sync_image.sh {{ image }}
+{% endfor -%}

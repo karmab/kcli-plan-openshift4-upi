@@ -116,3 +116,4 @@ kcli create plan
 |build                      |False                                                                                             |
 |small_iso                  |False                                                                                             |
 |olm_operators              |['local-storage-operator', 'performance-addon-operator', 'ptp-operator', 'sriov-network-operator']|
+|extra_images               |[]                                                                                                |
