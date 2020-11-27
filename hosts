@@ -1,17 +1,17 @@
-{{ virtual_bootstrap_mac }},{{ cluster }}-bootstrap,[{{ machine_cidr|network_ip(4) }}]
+{{ virtual_bootstrap_mac }},{{ cluster }}-bootstrap,{{ machine_cidr|network_ip(4, True) }}
 {%- if virtual_masters -%}
 {%- for num in range(0, virtual_masters_number) %}
-id:00:03:00:01:{{ virtual_masters_mac_prefix + ":" + "%02.d" | format(num + 1)| string }},{{ cluster }}-master-{{ num }},[{{ machine_cidr|network_ip(5 + num) }}]
+id:00:03:00:01:{{ virtual_masters_mac_prefix + ":" + "%02.d" | format(num + 1)| string }},{{ cluster }}-master-{{ num }},{{ machine_cidr|network_ip(5 + num, True) }}
 {%- endfor %}
 {%- endif %}
 {%- if virtual_workers -%}
 {%- for num in range(0, virtual_workers_number) %}
-id:00:03:00:01:{{ virtual_workers_mac_prefix + ":" + "%02.d" | format(num + 1)| string }},{{ cluster }}-worker-{{ num }},[{{ machine_cidr|network_ip(16 + num) }}]
+id:00:03:00:01:{{ virtual_workers_mac_prefix + ":" + "%02.d" | format(num + 1)| string }},{{ cluster }}-worker-{{ num }},{{ machine_cidr|network_ip(16 + num, True) }}
 {%- endfor %}
 {%- endif %}
 {%- for master in baremetal_masters %}
-{{ master['duid']| default('id:00:03:00:01') }}:{{ master['provisioning_mac'] }},{{ cluster }}-bm-master-{{ loop.index -1 }},[{{ machine_cidr|network_ip(35 + loop.index) }}]
+{{ master['duid']| default('id:00:03:00:01') }}:{{ master['provisioning_mac'] }},{{ cluster }}-bm-master-{{ loop.index -1 }},{{ machine_cidr|network_ip(35 + loop.index, True) }}
 {%- endfor %}
 {%- for worker in baremetal_workers %}
-{{ worker['duid']| default('id:00:03:00:01') }}:{{ worker['provisioning_mac'] }},{{ cluster }}-bm-worker-{{ loop.index - 1}},[{{ machine_cidr|network_ip(45 + loop.index) }}]
+{{ worker['duid']| default('id:00:03:00:01') }}:{{ worker['provisioning_mac'] }},{{ cluster }}-bm-worker-{{ loop.index - 1}},{{ machine_cidr|network_ip(45 + loop.index, True) }}]
 {%- endfor %}
