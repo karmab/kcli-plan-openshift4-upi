@@ -1,17 +1,20 @@
 ## Purpose
 
-This repository provides a plan which deploys a vm where:
+This repository provides a plan which deploys an installer vm where:
 - openshift-install and oc are downloaded
-- dnsmasq and radvd are set to provide ipv6 services in a dedicated network.
+- dnsmasq, haproxy and radvd are set to provide services in a dedicated network, either on ipv4 or ipv6
+- disconnected registry and olm operators are synced
 - openshift-install is leveraged to generate ignition file for all the nodes.
 - rhcos live iso is used along with coreos-installer to generate an auto installer for each node
 - an optional bootstrap vm is precreated to be used along with the live iso
+- if specified, virtual masters and workers are created and started
+- if specified, baremetal masters and workers are rebooted in the iso via racadm
 
 ## Why
 
-We leverage a dedicated network for hosting ipv6 and upi support services 
+This provides an easy way to deploy Openshift using UPI
 
-We also use custom isos to drive the installation in an automated way
+Custom isos are used to drive the installation.
 
 ## Requirements
 
@@ -30,6 +33,8 @@ We also use custom isos to drive the installation in an automated way
 ### on dns
 
 in order to be able to access the env other ipv4, two baremetal vips can be provided for api and ingress
+
+Currently, the api-int dns record needs to be resolvable (over ipv4)
 
 ## Launch
 
@@ -78,7 +83,6 @@ kcli create plan
 |pullsecret                 |openshift_pull.json                                                                               |
 |notifyscript               |notify.sh                                                                                         |
 |dnsmasq                    |True                                                                                              |
-|radvd                      |True                                                                                              |
 |haproxy                    |True                                                                                              |
 |virtual_bootstrap          |True                                                                                              |
 |virtual_bootstrap_numcpus  |8                                                                                                 |

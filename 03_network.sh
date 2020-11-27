@@ -7,8 +7,8 @@ nmcli con mod "System eth0" +ipv4.addresses {{ vip }}/$PREFIX
 {%- endfor %}
 nmcli conn up "System eth0"
 {%- endif %}
-dnf -y install dnsmasq radvd haproxy
 {% if dnsmasq %}
+dnf -y install dnsmasq
 cp /root/dnsmasq.conf /etc
 cp /etc/resolv.conf /opt
 chmod 755 /opt/resolv.conf
@@ -17,13 +17,15 @@ echo search {{ cluster }}.{{ domain }} >> /etc/resolv.conf
 chattr +i /etc/resolv.conf
 systemctl enable --now dnsmasq
 {% endif %}
-{% if radvd %}
+{% if ':' in machine_cidr %}
+dnf -y install radvd
 cp /root/radvd.conf /etc
 sysctl -w net.ipv6.conf.all.forwarding=1
 sysctl -w net.ipv6.conf.eth1.accept_ra=2
 systemctl enable --now radvd
 {% endif %}
 {% if haproxy %}
+dnf -y install haproxy
 cp /root/haproxy.cfg /etc/haproxy
 sleep 20
 systemctl enable --now haproxy

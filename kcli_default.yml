@@ -33,7 +33,6 @@ provisioning_net: provisioning
 pullsecret: openshift_pull.json
 notifyscript: notify.sh
 dnsmasq: true
-radvd: true
 haproxy: true
 virtual_bootstrap: true
 virtual_bootstrap_numcpus: 8
