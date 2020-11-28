@@ -28,6 +28,16 @@
             },
             {
                 "contents": {
+                    "source": "data:text/plain;charset=utf-8;base64,STATIC_FILE",
+                    "verification": {}
+                },
+                "filesystem": "root",
+                "mode": 420,
+                "overwrite": true,
+                "path": "/root/static.txt"
+            },
+            {
+                "contents": {
                     "source": "data:text/plain;charset=utf-8;base64,IGNITION_FILE",
                     "verification": {}
                 },

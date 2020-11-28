@@ -61,7 +61,7 @@ kcli create plan
 |workers                    |0                                                                                                 |
 |keys                       |[]                                                                                                |
 |machine_cidr               |2620:52:0:1302::/64                                                                               |
-|static_ip                  |True                                                                                              |
+|static_ips                 |True                                                                                              |
 |image_url                  |None                                                                                              |
 |network                    |default                                                                                           |
 |pool                       |default                                                                                           |

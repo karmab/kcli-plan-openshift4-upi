@@ -7,6 +7,18 @@
 {%- endif %}
 #firstboot_args='console=tty0 rd.neednet=1 {{ nics | join(" ") }}'
 firstboot_args='console=tty0 rd.neednet=1'
+if [ -s /root/static.txt ] ; then
+  NIC={{ provisioning_nic }}
+  [ -d /sys/class/net/ens3 ] && NIC=ens3
+  MAC="$(cat /sys/class/net/$NIC/address)"
+  LINE=$(grep $MAC /root/static.txt)
+  if [ "$LINE" != "" ] ; then
+  HOSTNAME=$( echo $LINE | cut -d, -f2)
+  IP=$( echo $LINE | cut -d, -f3)
+  firstboot_args="$firstboot_args ip=$IP::{{ machine_cidr | network_ip(1, True) }}:64:$HOSTNAME.{{ domain }}:$NIC:none nameserver={{ machine_cidr | network_ip(1, True) }}"
+  fi
+fi
+
 for vg in $(vgs -o name --noheadings) ; do vgremove -y $vg ; done
 for pv in $(pvs -o name --noheadings) ; do pvremove -y $pv ; done
 if [ -b /dev/vda ]; then

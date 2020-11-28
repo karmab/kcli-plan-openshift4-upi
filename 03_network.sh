@@ -30,3 +30,7 @@ cp /root/haproxy.cfg /etc/haproxy
 sleep 20
 systemctl enable --now haproxy
 {% endif %}
+
+{%- if static_ips -%}
+cp /opt/hosts /root/static.txt
+{%- endif -%}

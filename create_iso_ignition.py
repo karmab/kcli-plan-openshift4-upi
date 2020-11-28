@@ -30,6 +30,12 @@ else:
     content = open('iso.sh').read()
     iso_script = base64.b64encode(content.encode()).decode("UTF-8")
 
+if not os.path.exists('static.txt'):
+    static_file = ""
+else:
+    content = open('static.txt').read()
+    static_file = base64.b64encode(content.encode()).decode("UTF-8")
+
 
 with open('iso.ign', 'w') as iso:
     for line in open(iso_template, 'r').readlines():
@@ -37,6 +43,8 @@ with open('iso.ign', 'w') as iso:
             iso.write(line.replace('SSH_KEY', ssh_key))
         elif 'IGNITION_FILE' in line:
             iso.write(line.replace('IGNITION_FILE', ignition_file))
+        elif 'STATIC_FILE' in line:
+            iso.write(line.replace('STATIC_FILE', static_file))
         elif 'ISO_SCRIPT' in line:
             iso.write(line.replace('ISO_SCRIPT', iso_script))
         else:
