@@ -49,7 +49,7 @@ virtual_workers_number: 1
 virtual_workers_numcpus: 8
 virtual_workers_memory: 16384
 virtual_workers_mac_prefix: aa:aa:aa:bb:bb
-notify: true
+notify: false
 deploy: true
 disconnected: true
 disconnected_registry_image: "quay.io/saledort/registry:2"
