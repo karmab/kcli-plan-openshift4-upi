@@ -15,7 +15,7 @@ if [ -s /root/static.txt ] ; then
   if [ "$LINE" != "" ] ; then
   HOSTNAME=$( echo $LINE | cut -d, -f2)
   IP=$( echo $LINE | cut -d, -f3)
-  firstboot_args="$firstboot_args ip=$IP::{{ machine_cidr | network_ip(1, True) }}:64:$HOSTNAME.{{ domain }}:$NIC:none nameserver={{ machine_cidr | network_ip(1, True) }}"
+  firstboot_args="$firstboot_args ip=$IP::{{ machine_cidr | network_ip(1, True) }}:64:$HOSTNAME.{{ domain }}:$NIC:none nameserver={{ machine_cidr | network_ip(1, True) }} {{ nics | join(" ") }}"
   fi
 fi
 
