@@ -85,8 +85,8 @@
    mask: {{ machine_cidr.split('/')[1] }}
    gateway: {{ machine_cidr|network_ip(1)}}
    vips:
-   - {{ machine_cidr|network_ip(2) }}
-   - {{ machine_cidr|network_ip(3) }}
+   - {{ api_ip|default(machine_cidr|network_ip(2)) }}
+   - {{ ingress_ip|default(machine_cidr|network_ip(3)) }}
  disks:
  - {{ disk_size }}
  files:
