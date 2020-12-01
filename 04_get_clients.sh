@@ -23,8 +23,8 @@ oc adm release extract --registry-config $PULL_SECRET --command=openshift-instal
 curl -Lk https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable/openshift-install-linux.tar.gz > openshift-install-linux.tar.gz
 tar zxvf openshift-install-linux.tar.gz
 rm -rf openshift-install-linux.tar.gz
-{% endif %}
 mv openshift-install /usr/bin
+{% endif %}
 chmod +x /usr/bin/openshift-install
 
 oc completion bash >>/etc/bash_completion.d/oc_completion
