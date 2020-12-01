@@ -1,5 +1,5 @@
 export PATH=/root/bin:$PATH
-dnf -y install httpd httpd-tools jq bind-utils
+dnf -y install httpd httpd-tools jq bind-utils skopeo
 dnf -y module disable container-tools
 dnf -y install 'dnf-command(copr)'
 dnf -y copr enable rhcontainerbot/container-selinux
