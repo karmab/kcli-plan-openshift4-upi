@@ -1,6 +1,6 @@
 export PATH=/root/bin:$PATH
 dnf -y install httpd httpd-tools jq bind-utils skopeo
-{%- if not 'rhel' in image -%}
+{% if not 'rhel' in image -%}
 dnf -y module disable container-tools
 dnf -y install 'dnf-command(copr)'
 dnf -y copr enable rhcontainerbot/container-selinux
