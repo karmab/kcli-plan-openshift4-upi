@@ -72,6 +72,8 @@
  keys: {{ keys }}
 {%- if 'rhel' in image %}
  rhnregister: {{ rhnregister }}
+ rhnuser: {{ rhnuser }}
+ rhnpassword: {{ rhnpassword }}
 {%- endif %}
  networkwait: {{ networkwait }}
  memory: {{ memory }}

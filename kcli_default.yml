@@ -20,6 +20,8 @@ memory: 32768
 disk_size: 80
 extra_disks: []
 rhnregister: true
+rhnuser: dummy
+rhnpassword: dummy
 networkwait: 30
 fake_network: false
 disable_nics: []
