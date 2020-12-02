@@ -1,4 +1,5 @@
 cluster={{ cluster }}
+dir=/root/ocp
 BASE="/tmp/base.iso"
 IP={{ machine_cidr|network_ip(1) }}
 echo $IP | grep -q ':' && IP=[$IP]
@@ -27,7 +28,7 @@ for role in bootstrap master worker; do
  IGNITION_FILE="http://$IP:$PORT/$role-iso.ign"
  KERNEL_ARGS="coreos.inst.install_dev=vda coreos.inst=yes coreos.inst.ignition_url=$IGNITION_FILE"
  echo Creating iso for $role
- cp /root/ocp/$role.ign config.ign
+ cp $dir/$role.ign config.ign
  python3 create_iso_ignition.py
  cp iso.ign /var/www/html/$role-iso.ign
  rm -rf $BASE $OUTPUT /tmp/syslinux* /tmp/coreos

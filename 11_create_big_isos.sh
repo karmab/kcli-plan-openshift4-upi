@@ -1,4 +1,5 @@
 cluster={{ cluster }}
+dir=/root/ocp
 
 cd /root/
 dnf -y install httpd python3
@@ -11,7 +12,7 @@ fi
 COREOSINSTALLER="podman run --privileged --rm -v /dev:/dev -v /run/udev:/run/udev -v $PWD:/data -w /data quay.io/coreos/coreos-installer:release"
 for role in bootstrap master worker; do
  echo Creating iso for $role
- cp /root/ocp/$role.ign config.ign
+ cp $dir/$role.ign config.ign
  # temporary set core password to core
  # cat preconfig.ign | jq '.passwd.users[0] += {"passwordHash": "$1$ADV1tN41$cK2P0jJl5BbJ9FW06/OgT."}' > config.ign
  python3 create_iso_ignition.py 
