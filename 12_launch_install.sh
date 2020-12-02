@@ -1,5 +1,7 @@
 export HOME=/root
+dir="/root/ocp"
 cluster={{ cluster }}
+plan={{ plan }}
 pool={{ pool }}
 {%- for node in baremetal_masters %}
 /root/bin/racadm.sh {{ cluster }} master {{ node['ipmi_address'] }} {{ node['ipmi_user'] | default(ipmi_user) }} {{ node['ipmi_password'] | default(ipmi_password) }}
@@ -21,6 +23,7 @@ for role in bootstrap master worker ; do
   kcli delete image -y -p $pool $cluster-$role.iso
   kcli download image -u http://$IP:8080/$cluster-$role.iso -p $pool $cluster-$role.iso
 done
-kcli start plan {{ plan }}
-openshift-install --dir /root/ocp --log-level debug wait-for bootstrap-complete
-openshift-install --dir /root/ocp --log-level debug wait-for install-complete && kcli delete vm --yes $cluster-bootstrap
+kcli start plan $plan
+openshift-install --dir $dir --log-level debug wait-for bootstrap-complete
+openshift-install --dir $dir --log-level debug wait-for install-complete
+kcli stop vm $cluster-bootstrap

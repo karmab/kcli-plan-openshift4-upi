@@ -111,6 +111,8 @@
    origin: helpers/racadm.sh
  - path: /root/bin/sync_image.sh
    origin: helpers/sync_image.sh
+ - path: /root/bin/clean.sh
+   origin: helpers/clean.sh
  - install-config.yaml                                                                                                                           
  - .bashrc
  - iso.sh
