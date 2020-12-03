@@ -1,9 +1,9 @@
 apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfig
 metadata:
-  name: blacklist-ipi-worker
+  name: nodeip-master
   labels:
-    machineconfiguration.openshift.io/role: worker
+    machineconfiguration.openshift.io/role: master
 spec:
   config:
     ignition:
@@ -29,23 +29,3 @@ spec:
              else echo Hostname properly set; exit 0 ; fi"
           [Install]
           WantedBy=multi-user.target
-    storage:
-      files:
-        - contents:
-            source: data:,
-            verification: {}
-          filesystem: root
-          mode: 420
-          path: /etc/kubernetes/manifests/coredns.yaml
-        - contents:
-            source: data:,
-            verification: {}
-          filesystem: root
-          mode: 420
-          path: /etc/kubernetes/manifests/keepalived.yaml
-        - contents:
-            source: data:,
-            verification: {}
-          filesystem: root
-          mode: 420
-          path: /etc/kubernetes/manifests/mdns-publisher.yaml
