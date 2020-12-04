@@ -1,16 +1,16 @@
 apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfig
 metadata:
-  name: nodeip-worker
+  name: magic-hostname-master
   labels:
-    machineconfiguration.openshift.io/role: worker
+    machineconfiguration.openshift.io/role: master
 spec:
   config:
     ignition:
       version: 2.2.0
     systemd:
       units:
-      - name: nodeip-configuration.service
+      - name: magic-hostname.service
         enabled: true
         contents: |
           [Unit]
