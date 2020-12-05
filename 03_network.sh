@@ -1,12 +1,12 @@
 setenforce 0
 sed -i 's/SELINUX=.*/SELINUX=permissive/' /etc/selinux/config
-{%- if baremetal_vips %}
+{% if baremetal_vips %}
 PREFIX=$(ip a l  eth0 | grep inet | head -1 | awk '{print $2}' | cut -d/ -f2)
-{%- for vip in baremetal_vips %}
+{% for vip in baremetal_vips %}
 nmcli con mod "System eth0" +ipv4.addresses {{ vip }}/$PREFIX
-{%- endfor %}
+{% endfor %}
 nmcli conn up "System eth0"
-{%- endif %}
+{% endif %}
 {% if dnsmasq %}
 dnf -y install dnsmasq
 cp /root/dnsmasq.conf /etc
@@ -31,6 +31,6 @@ sleep 20
 systemctl enable --now haproxy
 {% endif %}
 
-{%- if static_ips -%}
+{% if static_ips %}
 cp /opt/hosts /root/static.txt
-{%- endif -%}
+{% endif %}

@@ -22,13 +22,13 @@
   - name: {{ provisioning_net }}
     mac: {{ virtual_bootstrap_mac }}
  disks:
-{%- for size in [disk_size] + extra_disks %}
+{% for size in [disk_size] + extra_disks %}
   - {{ size }}
-{%- endfor %}
+{% endfor %}
 {% endif %}
 
-{%- if virtual_masters %}
-{%- for num in range(0, virtual_masters_number) %}
+{% if virtual_masters %}
+{% for num in range(0, virtual_masters_number) %}
 {{ cluster }}-master-{{ num }}:
  pool: {{ pool }}
  numcpus: {{ virtual_masters_numcpus }}
@@ -40,14 +40,14 @@
   - name: {{ provisioning_net }}
     mac: {{ virtual_masters_mac_prefix + ":" + "%02.d" | format(num + 1)| string }}
  disks:
-{%- for size in [disk_size] + extra_disks %}
+{% for size in [disk_size] + extra_disks %}
   - {{ size }}
-{%- endfor %}
+{% endfor %}
 {% endfor %}
 {% endif %}
 
-{%- if virtual_workers %}
-{%- for num in range(0, virtual_workers_number) %}
+{% if virtual_workers %}
+{% for num in range(0, virtual_workers_number) %}
 {{ cluster }}-worker-{{ num }}:
  pool: {{ pool }}
  numcpus: {{ virtual_workers_numcpus }}
@@ -59,9 +59,9 @@
   - name: {{ provisioning_net }}
     mac: {{ virtual_workers_mac_prefix + ":" + "%02.d" | format(num + 1)| string }}
  disks:
-{%- for size in [disk_size] + extra_disks %}
+{% for size in [disk_size] + extra_disks %}
   - {{ size }}
-{%- endfor %}
+{% endfor %}
 {% endfor %}
 {% endif %}
 
@@ -70,9 +70,9 @@
  pool: {{ pool }} 
  numcpus: {{ numcpus }}
  keys: {{ keys }}
-{%- if 'rhel' in image %}
+{% if 'rhel' in image %}
  rhnregister: {{ rhnregister }}
-{%- endif %}
+{% endif %}
  networkwait: {{ networkwait }}
  memory: {{ memory }}
  privatekey: true

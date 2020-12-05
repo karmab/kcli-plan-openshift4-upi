@@ -1,11 +1,11 @@
 export PATH=/root/bin:$PATH
 dnf -y install httpd httpd-tools jq bind-utils skopeo
-{% if not 'rhel' in image -%}
+{% if not 'rhel' in image %}
 dnf -y module disable container-tools
 dnf -y install 'dnf-command(copr)'
 dnf -y copr enable rhcontainerbot/container-selinux
 curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable.repo https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/CentOS_8/devel:kubic:libcontainers:stable.repo
-{%- endif %}
+{% endif %}
 dnf -y install podman
 IP=$(hostname -I | cut -d' ' -f1)
 REVERSE_NAME=$(dig -x $IP +short | sed 's/\.[^\.]*$//')
@@ -43,21 +43,21 @@ update-ca-trust extract
 htpasswd -bBc /opt/registry/auth/htpasswd $REGISTRY_USER $REGISTRY_PASSWORD
 podman create --name registry --net host --security-opt label=disable -v /opt/registry/data:/var/lib/registry:z -v /opt/registry/auth:/auth:z -v /opt/registry/conf/config.yml:/etc/docker/registry/config.yml -e "REGISTRY_AUTH=htpasswd" -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry" -e "REGISTRY_HTTP_SECRET=ALongRandomSecretForRegistry" -e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd -v /opt/registry/certs:/certs:z -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key {{ disconnected_registry_image }}
 podman start registry
-{% if openshift_image != None -%}
+{% if openshift_image != None %}
 export UPSTREAM_REGISTRY={{ openshift_image.split('/')[0] }}
 export UPSTREAM_REPOSITORY={{ openshift_image.split('/')[1] }}
 export BRANCH={{ openshift_image.split('/')[2].split(':')[0] }}
 export RELEASE_NAME=$UPSTREAM_REPOSITORY/$BRANCH
 export OCP_RELEASE={{ openshift_image.split(':')[1] }}
 export FINAL_SOURCE=$UPSTREAM_REGISTRY/$RELEASE_NAME
-{%- else -%}
+{% else %}
 export UPSTREAM_REGISTRY={{ disconnected_origin }}
 export UPSTREAM_REPOSITORY=openshift-release-dev
 export BRANCH=ocp-release
 export RELEASE_NAME=$UPSTREAM_REPOSITORY/$BRANCH
 export OCP_RELEASE={{ tag }}-x86_64
 export FINAL_SOURCE={{ disconnected_origin }}/ocp-release
-{%- endif %}
+{% endif %}
 export LOCAL_REGISTRY=$REGISTRY_NAME:5000
 export PULL_SECRET=/root/openshift_pull.json
 KEY=$( echo -n $REGISTRY_USER:$REGISTRY_PASSWORD | base64)
@@ -84,6 +84,6 @@ sed -e 's/^/  /' /opt/registry/certs/domain.crt >>  /root/install-config.yaml
 PULLSECRET=$(cat /root/temp.json | tr -d [:space:])
 echo -e "pullSecret: |\n  $PULLSECRET" >> /root/install-config.yaml
 
-{% for image in extra_images -%}
+{% for image in extra_images %}
 /root/bin/sync_image.sh {{ image }}
-{% endfor -%}
+{% endfor %}

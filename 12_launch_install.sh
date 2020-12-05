@@ -3,12 +3,12 @@ dir="/root/ocp"
 cluster={{ cluster }}
 plan={{ plan }}
 pool={{ pool }}
-{%- for node in baremetal_masters %}
+{% for node in baremetal_masters %}
 /root/bin/racadm.sh {{ cluster }} master {{ node['ipmi_address'] }} {{ node['ipmi_user'] | default(ipmi_user) }} {{ node['ipmi_password'] | default(ipmi_password) }}
-{%- endfor %}
-{%- for node in baremetal_workers %}
+{% endfor %}
+{% for node in baremetal_workers %}
 /root/bin/racadm.sh {{ cluster }} worker {{ node['ipmi_address'] }} {{ node['ipmi_user'] | default(ipmi_user) }} {{ node['ipmi_password'] | default(ipmi_password) }}
-{%- endfor %}
+{% endfor %}
 dnf -y copr enable karmab/kcli
 dnf -y install kcli
 mkdir -p /root/.kcli

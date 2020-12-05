@@ -4,10 +4,10 @@ rc-manager=file
 [connection]
 ipv6.dhcp-duid=ll
 ipv6.dhcp-iaid=mac
-{%-if disable_nics %}
+{% if disable_nics %}
 [keyfile]
 unmanaged-devices=interface-name:{{ disable_nics|join(';interface-name:') }}
-{%- endif %}
+{% endif %}
 EOF
 ) | base64 -w0)
 export ROLE=worker

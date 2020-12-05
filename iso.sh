@@ -1,10 +1,10 @@
 #!/bin/bash
-{%- set nics = [] -%}
-{% if disable_nics is defined -%}
-{%- for nic in disable_nics %}
-{%- do nics.append("ip=" + nic + ":off") %}
-{%- endfor -%}
-{%- endif %}
+{% set nics = [] %}
+{% if disable_nics is defined %}
+{% for nic in disable_nics %}
+{% do nics.append("ip=" + nic + ":off") %}
+{% endfor %}
+{% endif %}
 #firstboot_args='console=tty0 rd.neednet=1 {{ nics | join(" ") }}'
 firstboot_args='console=tty0 rd.neednet=1'
 if [ -s /root/static.txt ] ; then
