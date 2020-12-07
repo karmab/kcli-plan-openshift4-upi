@@ -3,6 +3,7 @@ info: |
     It runs dnsmasq, radvd and haproxy and generates iso files to use with ipi from openshift-install binary 
     and using rhcos live iso
 image: centos8
+playbook: false
 cluster: upi
 domain: karmalabs.com
 openshift_image: 

@@ -67,6 +67,7 @@
 
 {{ cluster }}-installer: 
  image: {{ image }} 
+ playbook: {{ playbook }}
  pool: {{ pool }} 
  numcpus: {{ numcpus }}
  keys: {{ keys }}
