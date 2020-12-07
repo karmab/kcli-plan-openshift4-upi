@@ -114,6 +114,8 @@
    origin: helpers/sync_image.sh
  - path: /root/bin/clean.sh
    origin: helpers/clean.sh
+ - path: /root/bin/mustgather.sh
+   origin: helpers/mustgather.sh
  - install-config.yaml                                                                                                                           
  - .bashrc
  - iso.sh
