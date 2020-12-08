@@ -25,6 +25,9 @@ networkwait: 30
 fake_network: false
 disable_nics: []
 baremetal_net: baremetal
+baremetal_installer_ip:
+baremetal_installer_mask:
+baremetal_installer_gateway:
 ipmi_user: root
 ipmi_password: calvin
 baremetal_vips: []

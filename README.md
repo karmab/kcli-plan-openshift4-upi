@@ -53,6 +53,7 @@ kcli create plan
 |Parameter                  |Default Value                                                                                     |
 |---------------------------|--------------------------------------------------------------------------------------------------|
 |image                      |centos8                                                                                           |
+|playbook                   |False                                                                                             |
 |cluster                    |upi                                                                                               |
 |domain                     |karmalabs.com                                                                                     |
 |openshift_image            |None                                                                                              |
@@ -61,7 +62,7 @@ kcli create plan
 |workers                    |0                                                                                                 |
 |keys                       |[]                                                                                                |
 |machine_cidr               |2620:52:0:1302::/64                                                                               |
-|static_ips                 |True                                                                                              |
+|static_ips                 |False                                                                                             |
 |image_url                  |None                                                                                              |
 |network                    |default                                                                                           |
 |pool                       |default                                                                                           |
@@ -74,11 +75,15 @@ kcli create plan
 |fake_network               |False                                                                                             |
 |disable_nics               |[]                                                                                                |
 |baremetal_net              |baremetal                                                                                         |
+|baremetal_installer_ip     |None                                                                                              |
+|baremetal_installer_mask   |None                                                                                              |
+|baremetal_installer_gateway|None                                                                                              |
 |ipmi_user                  |root                                                                                              |
 |ipmi_password              |calvin                                                                                            |
 |baremetal_vips             |[]                                                                                                |
 |baremetal_masters          |[]                                                                                                |
 |baremetal_workers          |[]                                                                                                |
+|provisioning_nic           |ens3                                                                                              |
 |provisioning_net           |provisioning                                                                                      |
 |pullsecret                 |openshift_pull.json                                                                               |
 |notifyscript               |notify.sh                                                                                         |
@@ -98,8 +103,8 @@ kcli create plan
 |virtual_workers_numcpus    |8                                                                                                 |
 |virtual_workers_memory     |16384                                                                                             |
 |virtual_workers_mac_prefix |aa:aa:aa:bb:bb                                                                                    |
-|notify                     |True                                                                                              |
-|deploy                     |False                                                                                             |
+|notify                     |False                                                                                             |
+|deploy                     |True                                                                                              |
 |disconnected               |True                                                                                              |
 |disconnected_registry_image|quay.io/saledort/registry:2                                                                       |
 |disconnected_user          |dummy                                                                                             |
