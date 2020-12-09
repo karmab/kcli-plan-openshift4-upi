@@ -69,7 +69,7 @@ curl 10.19.135.108/custom-iib-cnf10.tgz > /root/custom-iib-cnf10.tgz
 cd /root
 tar zxvf custom-iib-cnf10.tgz
 cd custom-iib
-sed -i "s/DEST=.*/DEST=$(hostname -f)/" upload.sh
+sed -i "s/DEST=.*:/DEST=$(hostname -f):/" upload.sh
 sed -i "s/cnf10-installer.cnf10.kni.lab.eng.bos.redhat.com/$(hostname -f)/" *yaml
 bash upload.sh
 cp /root/custom-iib/catalogSource.yaml /root/manifests/root/custom-iib/catalogSource-47.yaml
