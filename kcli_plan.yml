@@ -105,7 +105,7 @@
  - 07_nbde.sh
  - 08_ntp.sh
  - 09_nm.sh
- - 10_aurorules.sh
+ - 10_autorules.sh
  - 10_deploy_openshift_assets.sh
  - 11_create_big_isos.sh
  - 11_create_small_isos.sh
