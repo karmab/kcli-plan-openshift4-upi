@@ -1,0 +1,293 @@
+---
+- hosts: twix-installer
+  become: yes
+  vars:
+    cluster: twix
+    pool: default
+    domain: karmalabs.com
+    provisioning_net: fakeipv6
+    baremetal_net: default
+    fake_network: True
+    masters: 1
+    baremetal_vips: ['192.168.122.249', '192.168.122.250']
+    baremetal_masters: [{'provisioning_mac': '98:03:9b:61:80:48', 'ipmi_address': '192.168.1.45'}]
+    disable_nics: ['eno4']
+    openshift_image: registry.svc.ci.openshift.org/sno-vz-alpha/openshift:4.6.4-3
+    playbook: True
+    type: kvm
+    image: centos8
+    network_type: OVNKubernetes
+    workers: 0
+    keys: []
+    machine_cidr: 2620:52:0:1302::/64
+    static_ips: False
+    image_url: 
+    network: default
+    numcpus: 16
+    memory: 32768
+    disk_size: 80
+    extra_disks: []
+    rhnregister: True
+    networkwait: 30
+    baremetal_installer_ip: 
+    baremetal_installer_mask: 
+    baremetal_installer_gateway: 
+    ipmi_user: root
+    ipmi_password: calvin
+    baremetal_workers: []
+    provisioning_nic: ens3
+    pullsecret: openshift_pull.json
+    notifyscript: notify.sh
+    dnsmasq: True
+    haproxy: True
+    deploy: True
+    disconnected: True
+    disconnected_registry_image: quay.io/saledort/registry:2
+    disconnected_user: dummy
+    disconnected_password: dummy
+    disconnected_origin: quay.io
+    disconnected_prefix: ocp4
+    disconnected_url: 
+    nbde: False
+    olm: True
+    tag: 4.6.4
+    build: False
+    small_iso: False
+    olm_operators: ['local-storage-operator', 'performance-addon-operator', 'ptp-operator', 'sriov-network-operator']
+    extra_images: []
+    config_nets: ['default']
+    config_pool: default
+    config_host: 192.168.1.6
+    config_protocol: ssh
+    config_type: kvm
+    config_user: root
+    plan: twix
+  tasks:
+  - name: Creates directory /root/bin
+    file:
+      path: /root/bin
+      state: directory
+  - name: Creates directory manifests
+    file:
+      path: manifests
+      state: directory
+  - name: Creates directory operators
+    file:
+      path: operators
+      state: directory
+  - name: Template file 01_patch_installconfig.sh
+    template:
+      src: 01_patch_installconfig.sh
+      dest: /root/01_patch_installconfig.sh
+      owner: root 
+      mode: '700'
+  - name: Template file 02_packages.sh
+    template:
+      src: 02_packages.sh
+      dest: /root/02_packages.sh
+      owner: root 
+      mode: '700'
+  - name: Template file 03_network.sh
+    template:
+      src: 03_network.sh
+      dest: /root/03_network.sh
+      owner: root 
+      mode: '700'
+  - name: Template file 04_get_clients.sh
+    template:
+      src: 04_get_clients.sh
+      dest: /root/04_get_clients.sh
+      owner: root 
+      mode: '700'
+  - name: Template file 05_disconnected.sh
+    template:
+      src: 05_disconnected.sh
+      dest: /root/05_disconnected.sh
+      owner: root 
+      mode: '700'
+  - name: Template file 06_olm.sh
+    template:
+      src: 06_olm.sh
+      dest: /root/06_olm.sh
+      owner: root 
+      mode: '700'
+  - name: Template file 07_nbde.sh
+    template:
+      src: 07_nbde.sh
+      dest: /root/07_nbde.sh
+      owner: root 
+      mode: '700'
+  - name: Template file 08_ntp.sh
+    template:
+      src: 08_ntp.sh
+      dest: /root/08_ntp.sh
+      owner: root 
+      mode: '700'
+  - name: Template file 09_nm.sh
+    template:
+      src: 09_nm.sh
+      dest: /root/09_nm.sh
+      owner: root 
+      mode: '700'
+  - name: Template file 10_deploy_openshift_assets.sh
+    template:
+      src: 10_deploy_openshift_assets.sh
+      dest: /root/10_deploy_openshift_assets.sh
+      owner: root 
+      mode: '700'
+  - name: Template file 11_create_big_isos.sh
+    template:
+      src: 11_create_big_isos.sh
+      dest: /root/11_create_big_isos.sh
+      owner: root 
+      mode: '700'
+  - name: Template file 11_create_small_isos.sh
+    template:
+      src: 11_create_small_isos.sh
+      dest: /root/11_create_small_isos.sh
+      owner: root 
+      mode: '700'
+  - name: Template file 12_launch_install.sh
+    template:
+      src: 12_launch_install.sh
+      dest: /root/12_launch_install.sh
+      owner: root 
+      mode: '700'
+  - name: Template file 13_fix_disconnected_packages.sh
+    template:
+      src: 13_fix_disconnected_packages.sh
+      dest: /root/13_fix_disconnected_packages.sh
+      owner: root 
+      mode: '700'
+  - name: Template file 14_deploy_operators.sh
+    template:
+      src: 14_deploy_operators.sh
+      dest: /root/14_deploy_operators.sh
+      owner: root 
+      mode: '700'
+  - name: Template file helpers/create_small_iso.sh
+    template:
+      src: helpers/create_small_iso.sh
+      dest: /root/bin/small_iso.sh
+      owner: root 
+      mode: '700'
+  - name: Template file helpers/racadm.sh
+    template:
+      src: helpers/racadm.sh
+      dest: /root/bin/racadm.sh
+      owner: root 
+      mode: '700'
+  - name: Template file helpers/sync_image.sh
+    template:
+      src: helpers/sync_image.sh
+      dest: /root/bin/sync_image.sh
+      owner: root 
+      mode: '700'
+  - name: Template file helpers/clean.sh
+    template:
+      src: helpers/clean.sh
+      dest: /root/bin/clean.sh
+      owner: root 
+      mode: '700'
+  - name: Template file helpers/mustgather.sh
+    template:
+      src: helpers/mustgather.sh
+      dest: /root/bin/mustgather.sh
+      owner: root 
+      mode: '700'
+  - name: Template file install-config.yaml
+    template:
+      src: install-config.yaml
+      dest: /root/install-config.yaml
+      owner: root 
+      mode: '700'
+  - name: Template file .bashrc
+    template:
+      src: .bashrc
+      dest: /root/.bashrc
+      owner: root 
+      mode: '700'
+  - name: Template file iso.sh
+    template:
+      src: iso.sh
+      dest: /root/iso.sh
+      owner: root 
+      mode: '700'
+  - name: Template file iso.ign.template
+    template:
+      src: iso.ign.template
+      dest: /root/iso.ign.template
+      owner: root 
+      mode: '700'
+  - name: Template file create_iso_ignition.py
+    template:
+      src: create_iso_ignition.py
+      dest: /root/create_iso_ignition.py
+      owner: root 
+      mode: '700'
+  - name: Template file openshift_pull.json
+    template:
+      src: openshift_pull.json
+      dest: /root/openshift_pull.json
+      owner: root 
+      mode: '600'
+  - name: Template file 99-openshift-tang-encryption-clevis.sample.yaml
+    template:
+      src: 99-openshift-tang-encryption-clevis.sample.yaml
+      dest: /root/99-openshift-tang-encryption-clevis.sample.yaml
+      owner: root 
+      mode: '700'
+  - name: Template file 99-openshift-tang-encryption-ka.sample.yaml
+    template:
+      src: 99-openshift-tang-encryption-ka.sample.yaml
+      dest: /root/99-openshift-tang-encryption-ka.sample.yaml
+      owner: root 
+      mode: '700'
+  - name: Template file 99-openshift-chrony.sample.yaml
+    template:
+      src: 99-openshift-chrony.sample.yaml
+      dest: /root/99-openshift-chrony.sample.yaml
+      owner: root 
+      mode: '700'
+  - name: Template file 99-nm.sample.yaml
+    template:
+      src: 99-nm.sample.yaml
+      dest: /root/99-nm.sample.yaml
+      owner: root 
+      mode: '700'
+  - name: Template file dnsmasq.conf
+    template:
+      src: dnsmasq.conf
+      dest: /root/dnsmasq.conf
+      owner: root 
+      mode: '700'
+  - name: Template file hosts
+    template:
+      src: hosts
+      dest: /opt/hosts
+      owner: root 
+      mode: '755'
+  - name: Template file haproxy.cfg
+    template:
+      src: haproxy.cfg
+      dest: /root/haproxy.cfg
+      owner: root 
+      mode: '700'
+  - name: Template file radvd.conf
+    template:
+      src: radvd.conf
+      dest: /root/radvd.conf
+      owner: root 
+      mode: '700'
+  - name: Template script deploy.sh
+    template:
+      src: deploy.sh
+      dest: /root/.deploy.sh
+      owner: 'root'
+      mode: '700'
+      trim_blocks: false
+  - name: Run script deploy.sh and log in /root/.deploy.sh.log
+    shell: /root/.deploy.sh > /root/.deploy.sh.log 2>&1
+#    register: out
+#  - name: Result of script deploy.sh
+#    debug: var=out.stdout_lines

@@ -19,6 +19,9 @@ bash /root/bin/build.sh
 {% endif %}
 
 bash /root/09_nm.sh
+{% if masters > 1 or workers > 0 %}
+bash /root/10_autorules.sh
+{% endif %}
 export KUBECONFIG=/root/ocp/auth/kubeconfig
 bash /root/10_deploy_openshift_assets.sh
 {% if small_iso %}

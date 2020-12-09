@@ -105,6 +105,7 @@
  - 07_nbde.sh
  - 08_ntp.sh
  - 09_nm.sh
+ - 10_aurorules.sh
  - 10_deploy_openshift_assets.sh
  - 11_create_big_isos.sh
  - 11_create_small_isos.sh
@@ -134,6 +135,7 @@
  - 99-openshift-tang-encryption-ka.sample.yaml
  - 99-openshift-chrony.sample.yaml
  - 99-nm.sample.yaml
+ - 99-autorules.yaml.sample
  - dnsmasq.conf
  - path: /opt/hosts
    origin: hosts
