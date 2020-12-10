@@ -72,7 +72,7 @@ cd custom-iib
 sed -i "s/DEST=.*:/DEST=$(hostname -f):/" upload.sh
 sed -i "s/cnf10-installer.cnf10.kni.lab.eng.bos.redhat.com/$(hostname -f)/" *yaml
 bash upload.sh
-cp /root/custom-iib/catalogSource.yaml /root/manifests/root/custom-iib/catalogSource-47.yaml
-cp /root/custom-iib/imageContentSourcePolicy.yaml /root/manifests/root/custom-iib/imageContentSourcePolicy-47.yaml
+cp /root/custom-iib/catalogSource.yaml /root/manifests/catalogSource-47.yaml
+cp /root/custom-iib/imageContentSourcePolicy.yaml /root/manifests/imageContentSourcePolicy-47.yaml
 sed -i 's/4.6/4.7/' /root/operators/ptp-operator.yml /root/operators/sriov-network-operator.yml
 sed -i 's/source :*/source: custom-catalog/' /root/operators/ptp-operator.yml /root/operators/sriov-network-operator.yml
