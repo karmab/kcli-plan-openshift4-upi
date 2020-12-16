@@ -75,4 +75,4 @@ bash upload.sh
 cp /root/custom-iib/catalogSource.yaml /root/manifests/catalogSource-47.yaml
 cp /root/custom-iib/imageContentSourcePolicy.yaml /root/manifests/imageContentSourcePolicy-47.yaml
 sed -i 's/4.6/4.7/' /root/operators/ptp-operator.yml /root/operators/sriov-network-operator.yml
-sed -i 's/source :*/source: custom-catalog/' /root/operators/ptp-operator.yml /root/operators/sriov-network-operator.yml
+sed -i 's/source: .*/source: custom-catalog/' /root/operators/ptp-operator.yml /root/operators/sriov-network-operator.yml
