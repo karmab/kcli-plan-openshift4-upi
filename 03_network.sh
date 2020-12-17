@@ -21,7 +21,7 @@ systemctl enable --now dnsmasq
 dnf -y install radvd
 cp /root/radvd.conf /etc
 sysctl -w net.ipv6.conf.all.forwarding=1
-sysctl -w net.ipv6.conf.eth1.accept_ra=2
+sysctl -w net.ipv6.conf.{{ installer_provisioning_nic }}.accept_ra=2
 systemctl enable --now radvd
 {% endif %}
 {% if haproxy %}

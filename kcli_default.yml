@@ -33,6 +33,7 @@ ipmi_password: calvin
 baremetal_vips: []
 baremetal_masters: []
 baremetal_workers: []
+installer_provisioning_nic: eth1
 provisioning_nic: ens3
 provisioning_net: provisioning
 pullsecret: openshift_pull.json
