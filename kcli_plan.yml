@@ -70,6 +70,7 @@
  playbook: {{ playbook }}
  pool: {{ pool }} 
  numcpus: {{ numcpus }}
+ wait: {{ installer_wait }}
  keys: {{ keys }}
 {% if 'rhel' in image %}
  rhnregister: {{ rhnregister }}
