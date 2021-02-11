@@ -62,17 +62,3 @@ echo "oc apply -f ./redhat-operator-index-manifests/catalogsource.yaml"
 echo 1
 cp /root/redhat-operator-index-manifests/imageContentSourcePolicy.yaml /root/manifests  
 cp /root/redhat-operator-index-manifests/catalogsource.yaml /root/manifests  
-
-
-### Temp hack for 4.7 ptp and sriov operators
-curl 10.19.135.108/custom-iib-cnf10.tgz > /root/custom-iib-cnf10.tgz
-cd /root
-tar zxvf custom-iib-cnf10.tgz
-cd custom-iib
-sed -i "s/DEST=.*:/DEST=$(hostname -f):/" upload.sh
-sed -i "s/cnf10-installer.cnf10.kni.lab.eng.bos.redhat.com/$(hostname -f)/" *yaml
-bash upload.sh
-cp /root/custom-iib/catalogSource.yaml /root/manifests/catalogSource-47.yaml
-cp /root/custom-iib/imageContentSourcePolicy.yaml /root/manifests/imageContentSourcePolicy-47.yaml
-sed -i 's/4.6/4.7/' /root/operators/ptp-operator.yml /root/operators/sriov-network-operator.yml
-sed -i 's/source: .*/source: custom-catalog/' /root/operators/ptp-operator.yml /root/operators/sriov-network-operator.yml
