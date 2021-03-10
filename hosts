@@ -13,5 +13,5 @@ id:00:03:00:01:{{ virtual_workers_mac_prefix + ":" + "%02.d" | format(num + 1)| 
 {{ master['duid']| default('id:00:03:00:01') }}:{{ master['provisioning_mac'] }},{{ cluster }}-bm-master-{{ loop.index -1 }},{{ machine_cidr|network_ip(35 + loop.index, True) }}
 {% endfor %}
 {% for worker in baremetal_workers %}
-{{ worker['duid']| default('id:00:03:00:01') }}:{{ worker['provisioning_mac'] }},{{ cluster }}-bm-worker-{{ loop.index - 1}},{{ machine_cidr|network_ip(45 + loop.index, True) }}]
+{{ worker['duid']| default('id:00:03:00:01') }}:{{ worker['provisioning_mac'] }},{{ cluster }}-bm-worker-{{ loop.index - 1}},{{ machine_cidr|network_ip(45 + loop.index, True) }}
 {% endfor %}

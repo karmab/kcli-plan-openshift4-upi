@@ -113,6 +113,8 @@
  - 12_launch_install.sh
  - 13_fix_disconnected_packages.sh
  - 14_deploy_operators.sh
+ - ignition.template
+ - iso_hosts
  - path: /root/bin/small_iso.sh
    origin: helpers/create_small_iso.sh
  - path: /root/bin/racadm.sh

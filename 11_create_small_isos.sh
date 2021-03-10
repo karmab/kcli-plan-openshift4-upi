@@ -28,7 +28,12 @@ for role in bootstrap master worker; do
  IGNITION_FILE="http://$IP:$PORT/$role-iso.ign"
  KERNEL_ARGS="coreos.inst.install_dev=vda coreos.inst=yes coreos.inst.ignition_url=$IGNITION_FILE"
  echo Creating iso for $role
- cp $dir/$role.ign config.ign
+ if [ "$role" == "bootstrap" ] ; then
+   cp $dir/$role.ign config.ign
+ else
+   export ROLE=$role
+   envsubst < /root/ignition.template > config.ign
+ fi
  python3 create_iso_ignition.py
  cp iso.ign /var/www/html/$role-iso.ign
  rm -rf $BASE $OUTPUT /tmp/syslinux* /tmp/coreos

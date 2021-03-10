@@ -1,0 +1,1 @@
+{"ignition":{"config":{"merge":[{"source":"http://$API_IP:22624/config/$ROLE"}]},"version":"3.1.0"},"storage":{"files":[{"contents":{"source":"data:text/plain;charset=utf-8;base64,$HOSTS","verification":{}},"filesystem":"root","mode":420,"overwrite":true,"path":"/etc/hosts"}]}}

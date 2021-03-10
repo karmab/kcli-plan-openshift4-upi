@@ -69,7 +69,7 @@ nbde: false
 ntp: false
 olm: true
 ntp_server: 0.rhel.pool.ntp.org
-tag: 4.6.4
+tag: 4.7.0
 build: false
 small_iso: false
 olm_operators:
