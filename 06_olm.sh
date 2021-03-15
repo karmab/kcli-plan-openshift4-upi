@@ -40,6 +40,7 @@ opm index prune --from-index $RH_OP_INDEX --packages $RH_OP_PACKAGES --tag $LOCA
 podman push $LOCAL_REGISTRY/$LOCAL_REGISTRY_INDEX_TAG --authfile $OCP_PULLSECRET_AUTHFILE
 oc adm catalog mirror $LOCAL_REGISTRY/$LOCAL_REGISTRY_INDEX_TAG $LOCAL_REGISTRY/$LOCAL_REGISTRY_IMAGE_TAG --registry-config=$OCP_PULLSECRET_AUTHFILE
 
+mkdir redhat-operator-index-manifests
 echo "apiVersion: operators.coreos.com/v1alpha1" > redhat-operator-index-manifests/catalogsource.yaml
 echo "kind: CatalogSource" >> redhat-operator-index-manifests/catalogsource.yaml
 echo "metadata:" >> redhat-operator-index-manifests/catalogsource.yaml
