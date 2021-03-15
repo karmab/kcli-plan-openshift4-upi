@@ -4,6 +4,7 @@ info: |
     and using rhcos live iso
 image: centos8
 playbook: false
+lab: false
 cluster: upi
 domain: karmalabs.com
 openshift_image: 

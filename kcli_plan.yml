@@ -145,5 +145,7 @@
  - radvd.conf
  - path: /root/operators
    origin: operators
+{% if not lab %}
  scripts:
  - deploy.sh
+{% endif %}
