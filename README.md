@@ -117,7 +117,8 @@ kcli create plan
 |ntp                        |False                                                                                             |
 |olm                        |True                                                                                              |
 |ntp_server                 |0.rhel.pool.ntp.org                                                                               |
-|tag                        |4.6.4                                                                                             |
+|openshift_version          |4.7                                                                                               |
+|tag                        |4.7.0                                                                                             |
 |build                      |False                                                                                             |
 |small_iso                  |False                                                                                             |
 |olm_operators              |['local-storage-operator', 'performance-addon-operator', 'ptp-operator', 'sriov-network-operator']|
