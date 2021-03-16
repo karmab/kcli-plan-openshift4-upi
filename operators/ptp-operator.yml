@@ -22,7 +22,7 @@ metadata:
   name: ptp-operator-subscription
   namespace: openshift-ptp
 spec:
-  channel: "4.6"
+  channel: "{{ openshift_version }}"
   name: ptp-operator
   source: my-operator-catalog
   sourceNamespace: openshift-marketplace

@@ -20,7 +20,7 @@ metadata:
   name: sriov-network-operator-subscription
   namespace: openshift-sriov-network-operator
 spec:
-  channel: "4.6"
+  channel: "{{ openshift_version }}"
   name: sriov-network-operator
   source: my-operator-catalog
   sourceNamespace: openshift-marketplace

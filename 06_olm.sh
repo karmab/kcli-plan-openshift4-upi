@@ -1,7 +1,7 @@
 #!/bin/bash
 # Variables to set, suit to your installation
 cd /root
-export OCP_RELEASE="4.6"
+export OCP_RELEASE="{{ openshift_version }}"
 export OCP_PULLSECRET_AUTHFILE='/root/openshift_pull.json'
 IP=$(hostname -I | cut -d' ' -f1)
 REVERSE_NAME=$(dig -x $IP +short | sed 's/\.[^\.]*$//')
