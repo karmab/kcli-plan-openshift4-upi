@@ -71,7 +71,7 @@ ntp: false
 olm: true
 ntp_server: 0.rhel.pool.ntp.org
 openshift_version: 4.7
-tag: 4.7.0
+tag: 4.7.2
 build: false
 small_iso: false
 olm_operators:

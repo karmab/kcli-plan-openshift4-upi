@@ -19,7 +19,7 @@ kcli create disk -s {{ disk_size }} -p $pool {{ cluster }}-master-{{ num }}
 {% if virtual_workers %}
 {% for num in range(0, virtual_workers_number) %}
 kcli stop vm {{ cluster }}-worker-{{ num }}
-kcli delete disk {{ cluster }}-master-{{ num }}_0.img
+kcli delete disk {{ cluster }}-worker-{{ num }}_0.img
 kcli create disk -s {{ disk_size }} -p $pool {{ cluster }}-worker-{{ num }}
 {% endfor %}
 {% endif %}
