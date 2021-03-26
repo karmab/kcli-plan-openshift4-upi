@@ -40,25 +40,5 @@ opm index prune --from-index $RH_OP_INDEX --packages $RH_OP_PACKAGES --tag $LOCA
 podman push $LOCAL_REGISTRY/$LOCAL_REGISTRY_INDEX_TAG --authfile $OCP_PULLSECRET_AUTHFILE
 oc adm catalog mirror $LOCAL_REGISTRY/$LOCAL_REGISTRY_INDEX_TAG $LOCAL_REGISTRY/$LOCAL_REGISTRY_IMAGE_TAG --registry-config=$OCP_PULLSECRET_AUTHFILE
 
-echo "apiVersion: operators.coreos.com/v1alpha1" > redhat-operator-index-manifests/catalogsource.yaml
-echo "kind: CatalogSource" >> redhat-operator-index-manifests/catalogsource.yaml
-echo "metadata:" >> redhat-operator-index-manifests/catalogsource.yaml
-echo "  name: my-operator-catalog" >> redhat-operator-index-manifests/catalogsource.yaml
-echo "  namespace: openshift-marketplace" >> redhat-operator-index-manifests/catalogsource.yaml
-echo "spec:" >> redhat-operator-index-manifests/catalogsource.yaml
-echo "  sourceType: grpc" >> redhat-operator-index-manifests/catalogsource.yaml
-echo "  image: $LOCAL_REGISTRY/$LOCAL_REGISTRY_INDEX_TAG" >> redhat-operator-index-manifests/catalogsource.yaml
-echo "  displayName: Temp Lab" >> redhat-operator-index-manifests/catalogsource.yaml
-echo "  publisher: templab" >> redhat-operator-index-manifests/catalogsource.yaml
-echo "  updateStrategy:" >> redhat-operator-index-manifests/catalogsource.yaml
-echo "    registryPoll:" >> redhat-operator-index-manifests/catalogsource.yaml
-echo "      interval: 30m" >> redhat-operator-index-manifests/catalogsource.yaml
-
-echo ""
-echo "To apply the Red Hat Operators catalog mirror configuration to your cluster, do the following:"
-echo "oc apply -f ./redhat-operator-index-manifests/imageContentSourcePolicy.yaml"  
-echo "oc apply -f ./redhat-operator-index-manifests/catalogsource.yaml"  
-
-echo 1
-cp /root/redhat-operator-index-manifests/imageContentSourcePolicy.yaml /root/manifests  
-cp /root/redhat-operator-index-manifests/catalogsource.yaml /root/manifests  
+cp /root/manifests-redhat-operator-index-*/imageContentSourcePolicy.yaml /root/manifests
+cp /root/manifests-redhat-operator-index-*/catalogsource.yaml /root/manifests
