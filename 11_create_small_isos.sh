@@ -20,7 +20,7 @@ if [ ! -f rhcos-live.x86_64.iso ]
 then
   curl -Lk https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/latest/rhcos-live.x86_64.iso > rhcos-live.x86_64.iso
 fi
-curl -Lk https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/latest/rhcos-4.6.1-x86_64-live-rootfs.x86_64.img > /var/www/html/rootfs.img
+curl -Lk https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/latest/rhcos-live-rootfs.x86_64.img > /var/www/html/rootfs.img
 
 git clone https://github.com/redhat-ztp/ztp-iso-generator.git 
 for role in bootstrap master worker; do
