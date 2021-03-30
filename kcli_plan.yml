@@ -137,7 +137,10 @@
  - 99-openshift-tang-encryption-ka.sample.yaml
  - 99-openshift-chrony.sample.yaml
  - 99-nm.sample.yaml
- - 99-autorules.yaml.sample
+ - 99-autorules-namespace.yaml
+ - 99-autorules-configmap.yaml
+ - 99-autorules-clusterrolebinding.yaml
+ - 99-autorules-deployment.yaml
  - dnsmasq.conf
  - path: /opt/hosts
    origin: hosts

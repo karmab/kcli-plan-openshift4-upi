@@ -11,7 +11,7 @@ then
 fi
 COREOSINSTALLER="podman run --privileged --rm -v /dev:/dev -v /run/udev:/run/udev -v $PWD:/data -w /data quay.io/coreos/coreos-installer:release"
 export API_IP={{ api_ip|default(machine_cidr|network_ip(2)) }}
-export HOSTS=$(echo "grep $API_IP /etc/hosts || echo $API_IP api-int.{{ cluster }}.{{ domain }} api.{{ cluster }}.{{ domain }} >> /etc/hosts"| base64 -w0)
+export HOSTS=$(echo -e "#!/bin/bash\ngrep $API_IP /etc/hosts || echo $API_IP api-int.{{ cluster }}.{{ domain }} api.{{ cluster }}.{{ domain }} >> /etc/hosts"| base64 -w0)
 for role in bootstrap master worker; do
  echo Creating iso for $role
  if [ "$role" == "bootstrap" ] ; then

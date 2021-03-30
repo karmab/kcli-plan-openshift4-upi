@@ -25,6 +25,5 @@ for role in bootstrap master worker ; do
 done
 kcli start plan $plan
 openshift-install --dir $dir --log-level debug wait-for bootstrap-complete
-[ -f /root/99-autorules.yaml ] && oc create -f /root/99-autorules.yaml
 openshift-install --dir $dir --log-level debug wait-for install-complete
 kcli stop vm $cluster-bootstrap
