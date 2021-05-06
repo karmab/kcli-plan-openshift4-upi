@@ -1,0 +1,55 @@
+{{ image }}:
+ type: image
+ url: {{ image_url }}
+
+{% if fake_network %}
+{{ provisioning_net }}:
+ type: network
+ cidr: 172.24.0.0/24
+ dhcp: False
+ isolated: true
+{% endif %}
+
+{{ cluster }}-minimal-installer: 
+ image: {{ image }} 
+ playbook: {{ playbook }}
+ pool: {{ pool }} 
+ numcpus: {{ numcpus }}
+ wait: {{ installer_wait }}
+ keys: {{ keys }}
+{% if 'rhel' in image %}
+ rhnregister: {{ rhnregister }}
+{% endif %}
+ networkwait: {{ networkwait }}
+ memory: {{ memory }}
+ notify: {{ notify }}
+ notifyscript: {{ notifyscript }}
+ nets:                                                                                                                                         
+ - name: {{ baremetal_net }}
+{% if baremetal_installer_ip != None and baremetal_installer_mask != None and baremetal_installer_gateway != None %}
+   ip: {{ baremetal_installer_ip }}
+   mask: {{ baremetal_installer_mask  }}
+   gateway: {{ baremetal_installer_gateway }}
+{% endif %}
+ - name: {{ provisioning_net }}
+   ip: {{ installer_ip|default(machine_cidr|network_ip(1)) }}
+   mask: {{ machine_cidr.split('/')[1] }}
+   gateway: {{ machine_cidr|network_ip(1) }}
+   vips:
+   - {{ api_ip|default(machine_cidr|network_ip(2)) }}
+   - {{ ingress_ip|default(machine_cidr|network_ip(3)) }}
+ disks:
+ - {{ disk_size }}
+ files:
+ - 02_packages.sh
+ - 03_network.sh
+ - .bashrc
+ - path: /opt/hosts
+   origin: hosts
+   mode: 755
+ - haproxy.cfg
+ - radvd.conf
+ cmds:
+ - bash /root/02_packages.sh
+ - bash /root/03_network.sh
+
