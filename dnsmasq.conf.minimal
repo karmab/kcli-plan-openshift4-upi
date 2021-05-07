@@ -10,6 +10,7 @@ resolv-file=/opt/resolv.conf
 #dhcp-fqdn
 #log-queries
 except-interface=lo
+interface=eth1
 dhcp-lease-max=81
 log-dhcp
 #enable-ra
