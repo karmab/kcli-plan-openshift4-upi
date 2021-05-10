@@ -24,6 +24,7 @@ extra_disks: []
 rhnregister: true
 networkwait: 30
 fake_network: false
+disable_default_route: false
 disable_nics: []
 baremetal_net: baremetal
 baremetal_installer_ip:
