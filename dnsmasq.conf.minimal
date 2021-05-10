@@ -5,11 +5,17 @@ dhcp-authoritative
 dhcp-range={{ installer_provisioning_nic }},{{ machine_cidr | network_ip(11) }},{{ machine_cidr | network_ip(40) }},{{ machine_cidr.split('/')[1] }}
 dhcp-option={{ installer_provisioning_nic }},{{ "option6" if ':' in machine_cidr else "option" }}:dns-server,{{ machine_cidr | network_ip(1, True)}}
 
+{% if disable_default_route %}
+# disable default route
+dhcp-option=3
+{% endif %}
+
 resolv-file=/opt/resolv.conf
 #dhcp-ignore=tag:!known
 #dhcp-fqdn
 #log-queries
 except-interface=lo
+interface=eth1
 dhcp-lease-max=81
 log-dhcp
 #enable-ra
