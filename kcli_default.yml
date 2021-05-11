@@ -13,6 +13,7 @@ masters: 3
 workers: 0
 keys: []
 machine_cidr: 2620:52:0:1302::/64
+dhcp_number: 253
 static_ips: false
 image_url:
 network: default

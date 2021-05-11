@@ -12,7 +12,7 @@ dnf -y install dnsmasq
 cp /root/dnsmasq.conf /etc
 cp /etc/resolv.conf /opt
 chmod 755 /opt/resolv.conf
-echo nameserver $(hostname -I | cut -d' ' -f1) > /etc/resolv.conf
+echo nameserver {{ machine_cidr|network_ip(1) }} > /etc/resolv.conf
 echo search {{ cluster }}.{{ domain }} >> /etc/resolv.conf
 chattr +i /etc/resolv.conf
 systemctl enable --now dnsmasq

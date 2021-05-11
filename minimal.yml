@@ -39,11 +39,12 @@
  - {{ disk_size }}
  files:
  - 02_packages.sh
- - 03_network.sh
+ - path: /root/03_network.sh
+   origin: 03_network.sh.minimal
  - path: /root/dnsmasq.conf
-   origin: dnsmasq.conf.minimal
+   origin: dnsmasq.conf
  - path: /opt/hosts
-   origin: hosts.minimal
+   origin: hosts
    mode: 755
  - haproxy.cfg
  - radvd.conf
