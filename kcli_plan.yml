@@ -90,7 +90,6 @@
  - name: {{ provisioning_net }}
    ip: {{ installer_ip|default(machine_cidr|network_ip(1)) }}
    mask: {{ machine_cidr.split('/')[1] }}
-   gateway: {{ machine_cidr|network_ip(1) }}
    vips:
    - {{ api_ip|default(machine_cidr|network_ip(2)) }}
    - {{ ingress_ip|default(machine_cidr|network_ip(3)) }}
@@ -124,6 +123,8 @@
    origin: helpers/clean.sh
  - path: /root/bin/mustgather.sh
    origin: helpers/mustgather.sh
+ - path: /root/bin/contrail.sh
+   origin: helpers/contrail.sh
  - install-config.yaml                                                                                                                           
  - .bashrc
  - iso.sh
