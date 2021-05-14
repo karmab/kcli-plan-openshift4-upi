@@ -1,0 +1,18 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  name: contail-registries-${ROLE}
+  labels:
+    machineconfiguration.openshift.io/role: ${ROLE}
+spec:
+  config:
+    ignition:
+      version: 2.2.0
+    storage:
+      files:
+        - contents:
+            source: data:text/plain;charset=utf-8;base64,${REGISTRIES_DATA}
+            verification: {}
+          filesystem: root
+          mode: 420
+          path: /etc/containers/registries.conf

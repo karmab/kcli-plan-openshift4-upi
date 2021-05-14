@@ -38,8 +38,7 @@
  - {{ disk_size }}
  files:
  - 02_packages.sh
- - path: /root/03_network.sh
-   origin: 03_network.sh.minimal
+ - 03_network.sh
  - path: /root/dnsmasq.conf
    origin: dnsmasq.conf
  - path: /opt/hosts
