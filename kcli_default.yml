@@ -17,7 +17,7 @@ dhcp_number: 253
 static_ips: false
 image_url:
 network: default
-pool: default                                                                                                                                 
+pool: default
 numcpus: 16   
 memory: 32768
 disk_size: 80

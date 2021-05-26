@@ -88,12 +88,12 @@
    gateway: {{ baremetal_installer_gateway }}
 {% endif %}
  - name: {{ provisioning_net }}
-   ip: {{ installer_ip|default(machine_cidr|network_ip(1)) }}
-   mask: {{ machine_cidr.split('/')[1] }}
-   gateway: {{ machine_cidr|network_ip(1) }}
-   vips:
-   - {{ api_ip|default(machine_cidr|network_ip(2)) }}
-   - {{ ingress_ip|default(machine_cidr|network_ip(3)) }}
+   noconf: true
+#   ip: {{ installer_ip|default(machine_cidr|network_ip(1)) }}
+#   mask: {{ machine_cidr.split('/')[1] }}
+#   vips:
+#   - {{ api_ip|default(machine_cidr|network_ip(2)) }}
+#   - {{ ingress_ip|default(machine_cidr|network_ip(3)) }}
  disks:
  - {{ disk_size }}
  files:
@@ -124,6 +124,8 @@
    origin: helpers/clean.sh
  - path: /root/bin/mustgather.sh
    origin: helpers/mustgather.sh
+ - path: /root/bin/contrail.sh
+   origin: helpers/contrail.sh
  - install-config.yaml                                                                                                                           
  - .bashrc
  - iso.sh
@@ -137,6 +139,9 @@
  - 99-openshift-tang-encryption-ka.sample.yaml
  - 99-openshift-chrony.sample.yaml
  - 99-nm.sample.yaml
+{% if network_type == 'Contrail' %}
+ - 99-contrail-registries.sample.yaml
+{% endif %}
  - 99-autorules-namespace.yaml
  - 99-autorules-configmap.yaml
  - 99-autorules-clusterrolebinding.yaml
