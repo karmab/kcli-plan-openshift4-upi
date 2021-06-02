@@ -15,7 +15,7 @@ mkdir -p /root/.kcli
 echo """default:
  client: mycli
 mycli:
- host: {{ config_host|default(baremetal_net|local_ip) }}
+ host: {{ config_host if config_host != '127.0.0.1' else baremetal_net|local_ip(true) }}
  user: {{ config_user|default('root') }}
 """ > /root/.kcli/config.yml 
 IP="$(hostname -I | cut -f1 -d" " | xargs)"
