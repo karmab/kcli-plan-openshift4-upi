@@ -5,7 +5,7 @@ bash /root/03_network.sh
 {% if build %}
 bash /root/bin/build.sh
 {% endif %}
-{% if disconnected %}
+{% if disconnected or ':' in machine_cidr %}
 /root/05_disconnected.sh
 {% endif %}
 {% if olm %}
