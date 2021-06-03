@@ -7,9 +7,7 @@ dnf -y copr enable rhcontainerbot/container-selinux
 curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable.repo https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/CentOS_8/devel:kubic:libcontainers:stable.repo
 {% endif %}
 dnf -y install podman
-IP=$(hostname -I | cut -d' ' -f1)
-REVERSE_NAME=$(dig -x $IP +short | sed 's/\.[^\.]*$//')
-REGISTRY_NAME=${REVERSE_NAME:-$(hostname -f)}
+REGISTRY_NAME=$(hostname -f)
 echo $REGISTRY_NAME:5000 > /root/url.txt
 REGISTRY_USER={{ disconnected_user if disconnected_user != None else 'dummy' }}
 REGISTRY_PASSWORD={{ disconnected_password if disconnected_password != None else 'dummy' }}
