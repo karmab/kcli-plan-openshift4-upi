@@ -9,6 +9,7 @@ pool={{ pool }}
 {% for node in baremetal_workers %}
 /root/bin/racadm.sh {{ cluster }} worker {{ node['ipmi_address'] }} {{ node['ipmi_user'] | default(ipmi_user) }} {{ node['ipmi_password'] | default(ipmi_password) }}
 {% endfor %}
+{% if not sno %}
 dnf -y copr enable karmab/kcli
 dnf -y install kcli
 mkdir -p /root/.kcli
@@ -27,3 +28,6 @@ kcli start plan $plan
 openshift-install --dir $dir --log-level debug wait-for bootstrap-complete
 openshift-install --dir $dir --log-level debug wait-for install-complete
 kcli stop vm $cluster-bootstrap
+{% else %}
+openshift-install --dir $dir --log-level debug wait-for install-complete
+{% endif %}

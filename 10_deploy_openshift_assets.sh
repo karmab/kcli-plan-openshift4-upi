@@ -15,4 +15,9 @@ ls manifests/*y*ml >/dev/null && cp manifests/*y*ml $dir/openshift
 {% if network_type == 'Contrail' %}
 bash /root/bin/contrail.sh
 {% endif %}
+{% if sno %}
+openshift-install --dir $dir --log-level debug create single-node-ignition-config
+mv $dir/bootstrap-in-place-for-live-iso.ign $dir/master.ign
+{% else %}
 openshift-install --dir $dir --log-level debug create ignition-configs
+{% endif %}

@@ -9,7 +9,7 @@ if [ ! -f rhcos-live.x86_64.iso ]
 then
   curl -Lk https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/{{ openshift_version }}/latest/rhcos-live.x86_64.iso > rhcos-live.x86_64.iso
 fi
-COREOSINSTALLER="podman run --privileged --rm -v /dev:/dev -v /run/udev:/run/udev -v $PWD:/data -w /data quay.io/coreos/coreos-installer:release"
+COREOSINSTALLER="podman run --rm -v /dev:/dev -v /run/udev:/run/udev -v $PWD:/data -w /data quay.io/coreos/coreos-installer:release"
 export IGNITION_VERSION={{ '3.2.0' if openshift_version|float > 4.7 else '3.1.0' }}
 export API_IP={{ api_ip|default(machine_cidr|network_ip(2)) }}
 export HOSTS=$(echo -e "#!/bin/bash\ngrep $API_IP /etc/hosts || echo $API_IP api-int.{{ cluster }}.{{ domain }} api.{{ cluster }}.{{ domain }} >> /etc/hosts"| base64 -w0)

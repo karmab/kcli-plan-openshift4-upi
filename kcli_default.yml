@@ -81,3 +81,4 @@ olm_operators:
 - ptp-operator
 - sriov-network-operator
 extra_images: []
+sno: false

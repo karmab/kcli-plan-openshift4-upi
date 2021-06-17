@@ -10,7 +10,7 @@
  isolated: true
 {% endif %}
 
-{% if virtual_bootstrap %}
+{% if virtual_bootstrap and not sno %}
 {{ cluster }}-bootstrap:
  pool: {{ pool }} 
  numcpus: {{ virtual_bootstrap_numcpus }}
