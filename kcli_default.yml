@@ -2,9 +2,9 @@ info: |
     This deploys a vm to be used for upi and ipv6
     It runs dnsmasq, radvd and haproxy and generates iso files to use with ipi from openshift-install binary 
     and using rhcos live iso
-image: centos8
+image: centos8stream
 playbook: false
-lab: false
+launch_steps: true
 cluster: upi
 domain: karmalabs.com
 openshift_image: 
@@ -24,7 +24,7 @@ disk_size: 80
 extra_disks: []
 rhnregister: true
 networkwait: 30
-fake_network: false
+lab: false
 disable_nics: []
 baremetal_net: baremetal
 baremetal_installer_ip:

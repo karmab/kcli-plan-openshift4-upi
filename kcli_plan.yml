@@ -2,7 +2,8 @@
  type: image
  url: {{ image_url }}
 
-{% if fake_network %}
+{% if lab %}
+
 {{ provisioning_net }}:
  type: network
  cidr: 172.24.0.0/24
@@ -154,7 +155,7 @@
  - radvd.conf
  - path: /root/operators
    origin: operators
-{% if not lab %}
+{% if launch_steps %}
  scripts:
  - deploy.sh
 {% endif %}

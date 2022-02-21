@@ -15,7 +15,7 @@
     openshift_image: registry.svc.ci.openshift.org/sno-vz-alpha/openshift:4.6.4-3
     playbook: True
     type: kvm
-    image: centos8
+    image: centos8stream
     network_type: OVNKubernetes
     workers: 0
     keys: []
